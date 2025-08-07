@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: feedbackhub-production
+  labels:
+    app: feedbackhub
+    environment: production
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: feedbackhub-development
+  labels:
+    app: feedbackhub
+    environment: development
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: feedbackhub-staging
+  labels:
+    app: feedbackhub
+    environment: staging
