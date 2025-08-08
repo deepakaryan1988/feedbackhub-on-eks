@@ -26,9 +26,9 @@ resource "kubernetes_namespace" "logging" {
     name = var.namespace
     labels = merge(
       {
-        "name"                                       = var.namespace
-        "app.kubernetes.io/managed-by"              = "terraform"
-        "app.kubernetes.io/part-of"                 = "logging-stack"
+        "name"                         = var.namespace
+        "app.kubernetes.io/managed-by" = "terraform"
+        "app.kubernetes.io/part-of"    = "logging-stack"
       },
       var.namespace_labels
     )
@@ -149,18 +149,18 @@ resource "helm_release" "loki_stack" {
   wait            = true
   wait_for_jobs   = true
 
-  values = [
+  values = concat([
     yamlencode({
       # Loki configuration
       loki = {
         enabled = true
-        
+
         # Use custom service account if created
         serviceAccount = var.create_loki_service_account ? {
-          create = false
-          name   = tostring(kubernetes_service_account.loki[0].metadata[0].name)
+          create      = false
+          name        = tostring(kubernetes_service_account.loki[0].metadata[0].name)
           annotations = {}
-        } : {
+          } : {
           create = true
           name   = var.loki_service_account_name
           annotations = var.loki_role_arn != null ? {
@@ -172,7 +172,7 @@ resource "helm_release" "loki_stack" {
         image = var.loki_image
 
         # Security context
-        securityContext = var.loki_security_context
+        securityContext          = var.loki_security_context
         containerSecurityContext = var.loki_container_security_context
 
         # Resource allocation
@@ -209,10 +209,10 @@ resource "helm_release" "loki_stack" {
 
         # Use custom service account if created
         serviceAccount = var.create_promtail_service_account ? {
-          create = false
-          name   = tostring(kubernetes_service_account.promtail[0].metadata[0].name)
+          create      = false
+          name        = tostring(kubernetes_service_account.promtail[0].metadata[0].name)
           annotations = {}
-        } : {
+          } : {
           create = true
           name   = var.promtail_service_account_name
           annotations = var.promtail_role_arn != null ? {
@@ -224,7 +224,7 @@ resource "helm_release" "loki_stack" {
         image = var.promtail_image
 
         # Security context
-        securityContext = var.promtail_security_context
+        securityContext          = var.promtail_security_context
         containerSecurityContext = var.promtail_container_security_context
 
         # Resource allocation
@@ -259,10 +259,10 @@ resource "helm_release" "loki_stack" {
 
         # Use custom service account if created
         serviceAccount = var.create_fluent_bit_service_account ? {
-          create = false
-          name   = tostring(kubernetes_service_account.fluent_bit[0].metadata[0].name)
+          create      = false
+          name        = tostring(kubernetes_service_account.fluent_bit[0].metadata[0].name)
           annotations = {}
-        } : {
+          } : {
           create = true
           name   = var.fluent_bit_service_account_name
           annotations = var.fluent_bit_role_arn != null ? {
@@ -341,24 +341,11 @@ resource "helm_release" "loki_stack" {
         enabled = var.enable_test_pods
       }
     })
-  ]
+    ],
+    length(var.helm_additional_values) > 0 ? [yamlencode(var.helm_additional_values)] : [],
+  length(var.helm_additional_sensitive_values) > 0 ? [yamlencode(var.helm_additional_sensitive_values)] : [])
 
-  # Additional Helm values from variables
-  dynamic "set" {
-    for_each = var.helm_additional_values
-    content {
-      name  = set.key
-      value = set.value
-    }
-  }
-
-  dynamic "set_sensitive" {
-    for_each = var.helm_additional_sensitive_values
-    content {
-      name  = set_sensitive.key
-      value = set_sensitive.value
-    }
-  }
+  # Additional values merged via concat for compatibility
 }
 
 # CloudWatch log group for centralized logging
@@ -371,9 +358,9 @@ resource "aws_cloudwatch_log_group" "cluster_logs" {
   tags = merge(
     var.tags,
     {
-      Name        = "${var.cluster_name}-cluster-logs"
-      Component   = "logging"
-      ManagedBy   = "terraform"
+      Name      = "${var.cluster_name}-cluster-logs"
+      Component = "logging"
+      ManagedBy = "terraform"
     }
   )
 }
@@ -387,9 +374,9 @@ resource "aws_cloudwatch_log_group" "application_logs" {
   tags = merge(
     var.tags,
     {
-      Name        = "${var.cluster_name}-application-logs"
-      Component   = "logging"
-      ManagedBy   = "terraform"
+      Name      = "${var.cluster_name}-application-logs"
+      Component = "logging"
+      ManagedBy = "terraform"
     }
   )
 }
@@ -403,9 +390,9 @@ resource "aws_cloudwatch_log_group" "dataplane_logs" {
   tags = merge(
     var.tags,
     {
-      Name        = "${var.cluster_name}-dataplane-logs"
-      Component   = "logging"
-      ManagedBy   = "terraform"
+      Name      = "${var.cluster_name}-dataplane-logs"
+      Component = "logging"
+      ManagedBy = "terraform"
     }
   )
 }
