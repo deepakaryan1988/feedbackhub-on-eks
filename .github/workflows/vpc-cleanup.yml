@@ -1,0 +1,56 @@
+name: VPC Cleanup (ap-south-1)
+
+on:
+  workflow_dispatch:
+    inputs:
+      vpc_id:
+        description: "Target VPC ID"
+        required: true
+        default: "vpc-086cba888a42b817a"
+      dry_run:
+        description: "Dry run (discovery + print commands only)"
+        required: true
+        default: "true"
+        type: choice
+        options: ["true", "false"]
+
+jobs:
+  cleanup:
+    name: Cleanup VPC Dependencies
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # for AWS OIDC if using role-to-assume
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (via role)
+        if: ${{ secrets.AWS_ROLE_TO_ASSUME != '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ap-south-1
+
+      - name: Configure AWS credentials (via access keys)
+        if: ${{ secrets.AWS_ROLE_TO_ASSUME == '' }}
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq
+
+      - name: Execute cleanup script
+        shell: bash
+        run: |
+          chmod +x scripts/vpc-cleanup-ap-south-1.sh
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            bash scripts/vpc-cleanup-ap-south-1.sh -v "${{ inputs.vpc_id }}" --dry-run
+          else
+            bash scripts/vpc-cleanup-ap-south-1.sh -v "${{ inputs.vpc_id }}"
+          fi

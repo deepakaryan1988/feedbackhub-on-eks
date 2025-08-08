@@ -1,0 +1,144 @@
+# Sample Terraform Variables for FeedbackHub EKS Infrastructure
+# Copy this file to terraform.tfvars and modify values as needed
+
+# General Configuration
+aws_region   = "us-east-1"
+project_name = "feedbackhub"
+environment  = "prod"
+
+# Network Configuration
+vpc_cidr                = "10.0.0.0/16"
+availability_zones_count = 3
+enable_nat_gateway      = true
+single_nat_gateway      = false  # Set to true for cost optimization in dev/test
+enable_vpc_flow_logs    = true
+
+# EKS Cluster Configuration
+cluster_version                      = "1.29"
+cluster_endpoint_public_access       = true
+cluster_endpoint_private_access      = true
+cluster_endpoint_public_access_cidrs = ["0.0.0.0/0"]  # Restrict this in production
+cluster_enabled_log_types           = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+cloudwatch_log_retention_days       = 30
+
+# Security
+enable_cluster_encryption    = true
+create_cluster_kms_key      = true
+enable_node_group_encryption = true
+
+# Node Group Configuration
+node_group_instance_types = ["t3.medium"]
+node_group_ami_type      = "AL2_x86_64"
+node_group_capacity_type = "ON_DEMAND"
+node_group_disk_size     = 50
+node_group_min_size      = 1
+node_group_max_size      = 5
+node_group_desired_size  = 2
+
+# Spot Instances (Cost Optimization)
+enable_spot_instances = true
+spot_instance_types   = ["t3.medium", "t3.large", "t3a.medium", "t3a.large"]
+spot_min_size        = 0
+spot_max_size        = 10
+spot_desired_size    = 2
+
+# Additional Features
+enable_fargate     = false
+enable_efs_csi     = false
+external_dns_enabled = false
+
+# ALB Controller
+alb_controller_chart_version = "1.6.2"
+alb_controller_replica_count = 2
+enable_aws_shield           = false
+enable_aws_waf              = false
+
+# Monitoring Stack (Prometheus + Grafana + Alertmanager)
+enable_monitoring          = true
+monitoring_namespace       = "monitoring"
+monitoring_chart_version   = "55.5.0"
+grafana_admin_password     = "change-me-in-production"  # Use a strong password
+prometheus_storage_size    = "50Gi"
+grafana_storage_size       = "10Gi"
+prometheus_replicas        = 1
+alertmanager_replicas      = 1
+enable_thanos             = false
+
+# Monitoring Ingress (Optional)
+prometheus_ingress_enabled = false
+grafana_ingress_enabled    = false
+prometheus_hostname        = "prometheus.yourdomain.com"
+grafana_hostname          = "grafana.yourdomain.com"
+enable_tls                = false
+
+# Logging Stack (Loki + Promtail)
+enable_logging             = true
+logging_namespace          = "logging"
+log_collector             = "promtail"  # or "fluent-bit"
+loki_storage_size         = "20Gi"
+enable_cloudwatch_logging = true
+cloudwatch_retention_days = 30
+
+# Logging Ingress (Optional)
+enable_loki_gateway           = false
+loki_gateway_ingress_enabled  = false
+loki_hostname                = "loki.yourdomain.com"
+
+# Default Tags
+default_tags = {
+  Project     = "feedbackhub"
+  Environment = "prod"
+  ManagedBy   = "terraform"
+  Owner       = "devops-team"
+  CostCenter  = "engineering"
+}
+
+# Custom IRSA Roles (Optional)
+custom_irsa_roles = {
+  # Example custom role for application
+  # feedbackhub-api = {
+  #   namespace            = "default"
+  #   service_account_name = "feedbackhub-api"
+  #   managed_policy_arns  = [
+  #     "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  #   ]
+  # }
+}
+
+# Access Entries (Optional)
+access_entries = {
+  # Example: Grant admin access to specific IAM users/roles
+  # admin = {
+  #   principal_arn = "arn:aws:iam::123456789012:user/admin"
+  #   policy_associations = {
+  #     admin = {
+  #       policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  #       access_scope = {
+  #         type = "cluster"
+  #       }
+  #     }
+  #   }
+  # }
+}
+
+# ALB Controller Resources
+alb_controller_resources = {
+  requests = {
+    cpu    = "100m"
+    memory = "128Mi"
+  }
+  limits = {
+    cpu    = "200m"
+    memory = "256Mi"
+  }
+}
+
+# Ingress Annotations (for ALB)
+ingress_annotations = {
+  "kubernetes.io/ingress.class"                = "alb"
+  "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
+  "alb.ingress.kubernetes.io/target-type"     = "ip"
+  "alb.ingress.kubernetes.io/listen-ports"    = "[{\"HTTP\": 80}, {\"HTTPS\": 443}]"
+  "alb.ingress.kubernetes.io/ssl-redirect"    = "443"
+  # "alb.ingress.kubernetes.io/certificate-arn" = "arn:aws:acm:us-east-1:123456789012:certificate/your-cert-id"
+}

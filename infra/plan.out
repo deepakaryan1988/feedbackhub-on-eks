@@ -1,0 +1,102 @@
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on main.tf line 318, in module "monitoring":
+[31m│[0m [0m 318:   prometheus_role_arn = module.irsa[4m.prometheus_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "prometheus_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on main.tf line 319, in module "monitoring":
+[31m│[0m [0m 319:   grafana_role_arn    = module.irsa[4m.grafana_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "grafana_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on main.tf line 421, in module "logging":
+[31m│[0m [0m 421:   loki_role_arn     = module.irsa[4m.loki_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "loki_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on main.tf line 422, in module "logging":
+[31m│[0m [0m 422:   promtail_role_arn = module.irsa[4m.promtail_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "promtail_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on main.tf line 423, in module "logging":
+[31m│[0m [0m 423:   fluent_bit_role_arn = module.irsa[4m.fluent_bit_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "fluent_bit_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on outputs.tf line 91, in output "oidc_provider_arn":
+[31m│[0m [0m  91:   value       = module.irsa[4m.oidc_provider_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "oidc_provider_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on outputs.tf line 101, in output "ebs_csi_role_arn":
+[31m│[0m [0m 101:   value       = module.irsa[4m.ebs_csi_role_arn[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "ebs_csi_role_arn".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mUnsupported attribute[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on outputs.tf line 111, in output "irsa_roles":
+[31m│[0m [0m 111:   value       = module.irsa[4m.irsa_role_arns[0m[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m [1mmodule.irsa[0m is a object
+[31m│[0m [0m[0m
+[31m│[0m [0mThis object does not have an attribute named "irsa_role_arns".
+[31m╵[0m[0m
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mError in function call[0m
+[31m│[0m [0m
+[31m│[0m [0m[0m  on ../terraform/nodegroups/main.tf line 29, in resource "aws_launch_template" "node_group":
+[31m│[0m [0m  29:   user_data = base64encode([4mtemplatefile([0m"${path.module}/user_data.sh", {
+[31m│[0m [0m  30:     cluster_name        = var.cluster_name
+[31m│[0m [0m  31:     cluster_endpoint    = var.cluster_endpoint
+[31m│[0m [0m  32:     cluster_ca_data     = var.cluster_certificate_authority_data
+[31m│[0m [0m  33:     bootstrap_arguments = each.value.bootstrap_extra_args
+[31m│[0m [0m  34:   }))[0m
+[31m│[0m [0m    [90m├────────────────[0m
+[31m│[0m [0m[0m    [90m│[0m while calling [1mtemplatefile[0m([0mpath, vars)
+[31m│[0m [0m    [90m│[0m [1mpath.module[0m is "../terraform/nodegroups"
+[31m│[0m [0m[0m    [90m│[0m [1mvar.cluster_certificate_authority_data[0m is a string
+[31m│[0m [0m[0m    [90m│[0m [1mvar.cluster_endpoint[0m is a string
+[31m│[0m [0m[0m    [90m│[0m [1mvar.cluster_name[0m is a string
+[31m│[0m [0m[0m
+[31m│[0m [0mCall to function "templatefile" failed:
+[31m│[0m [0m../terraform/nodegroups/user_data.sh:109,55-56: Missing open parenthesis;
+[31m│[0m [0mFunction selector must be followed by an open parenthesis to begin the
+[31m│[0m [0mfunction call..
+[31m╵[0m[0m
