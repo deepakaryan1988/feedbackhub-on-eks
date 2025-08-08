@@ -60,6 +60,8 @@ This project migrates the FeedbackHub application from AWS ECS to Amazon EKS, pr
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+Placeholder diagram: see `docs/screenshots/architecture.png`.
+
 ## ✨ Key Features
 
 ### 🏗️ **Infrastructure as Code**
@@ -171,8 +173,10 @@ feedbackhub-on-eks/
     ├── main.tf                   # Main Terraform configuration
     ├── variables.tf              # Variable definitions
     ├── outputs.tf                # Output values
-    ├── terraform.tfvars.example  # Example variable values
-    ├── terraform.tfvars.dev      # Development environment
+    ├── backend-dev.tf            # Local backend (safe for dev)
+    ├── backend-prod.tf           # Commented S3 backend (for later)
+    ├── dev.tfvars                # Development defaults (no NAT/ALB)
+    ├── prod.tfvars               # Production defaults
     └── README.md                 # Infrastructure documentation
 ```
 
@@ -188,24 +192,19 @@ Ensure you have the following tools installed:
 - [Helm](https://helm.sh/) >= 3.0 for package management
 - [Docker](https://www.docker.com/) for local development and building
 
-### 1. Deploy Infrastructure
+### 1. Run in dev mode (cost-aware, no apply)
 
 ```bash
 # Clone the repository
 git clone <your-repo-url>
 cd feedbackhub-on-eks/infra
 
-# Configure your environment
-cp terraform.tfvars.example terraform.tfvars
-# Edit terraform.tfvars with your specific values
-
-# Initialize and deploy
+# Initialize and validate
 terraform init
-terraform plan
-terraform apply
+terraform validate
 
-# Configure kubectl
-aws eks update-kubeconfig --region us-east-1 --name feedbackhub-prod
+# Preview dev changes (no-cost defaults: NAT/ALB/Ingress disabled)
+terraform plan -var-file=dev.tfvars
 ```
 
 ### 2. Verify Deployment
