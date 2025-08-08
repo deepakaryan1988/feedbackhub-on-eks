@@ -183,14 +183,14 @@ output "irsa_roles" {
 # kubectl Configuration
 output "kubectl_config" {
   description = "kubectl configuration command"
-  value       = "aws eks update-kubeconfig --region ${var.aws_region} --name ${local.cluster_name}"
+  value       = "aws eks update-kubeconfig --region ${coalesce(var.region, var.aws_region)} --name ${local.cluster_name}"
 }
 
 # Quick Access Commands
 output "access_commands" {
   description = "Quick access commands for the infrastructure"
   value = {
-    update_kubeconfig = "aws eks update-kubeconfig --region ${var.aws_region} --name ${local.cluster_name}"
+    update_kubeconfig = "aws eks update-kubeconfig --region ${coalesce(var.region, var.aws_region)} --name ${local.cluster_name}"
     
     # Monitoring access
     prometheus_port_forward = var.enable_monitoring ? "kubectl port-forward -n ${var.monitoring_namespace} svc/prometheus-kube-prometheus-prometheus 9090:9090" : "Monitoring not enabled"
@@ -214,7 +214,7 @@ output "infrastructure_summary" {
       name     = local.cluster_name
       version  = var.cluster_version
       endpoint = module.eks_cluster.cluster_endpoint
-      region   = var.aws_region
+      region   = coalesce(var.region, var.aws_region)
     }
     
     network = {

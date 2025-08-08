@@ -7,6 +7,13 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+# Optional alias for region to support dev/prod tfvars templates
+variable "region" {
+  description = "Alias for aws_region; prefer aws_region if both set"
+  type        = string
+  default     = null
+}
+
 variable "project_name" {
   description = "Name of the project"
   type        = string
@@ -184,6 +191,50 @@ variable "node_group_desired_size" {
   description = "Desired number of nodes in the node group"
   type        = number
   default     = 2
+}
+
+# Simplified EKS sizing inputs (optional overrides used by locals)
+variable "eks_node_instance_type" {
+  description = "EKS node instance type (single-type convenience var)"
+  type        = string
+  default     = null
+}
+
+variable "eks_node_min_size" {
+  description = "Minimum nodes (convenience var)"
+  type        = number
+  default     = null
+}
+
+variable "eks_node_desired_size" {
+  description = "Desired nodes (convenience var)"
+  type        = number
+  default     = null
+}
+
+variable "eks_node_max_size" {
+  description = "Maximum nodes (convenience var)"
+  type        = number
+  default     = null
+}
+
+# Cost/feature toggles (defaults safe for dev)
+variable "enable_nat_gateway" {
+  description = "Enable NAT Gateway(s). No effect in no-NAT module, reserved for future use"
+  type        = bool
+  default     = false
+}
+
+variable "create_alb" {
+  description = "Create AWS Load Balancer (ALB) controller and related resources"
+  type        = bool
+  default     = false
+}
+
+variable "create_ingress" {
+  description = "Enable ingress resources across components by default"
+  type        = bool
+  default     = false
 }
 
 variable "enable_bootstrap_user_data" {
