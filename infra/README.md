@@ -151,7 +151,7 @@ feedbackhub-on-eks/
 
 6. **Configure kubectl**
    ```bash
-   aws eks update-kubeconfig --region us-east-1 --name feedbackhub-prod
+   aws eks --no-cli-pager --region us-east-1 update-kubeconfig --name feedbackhub-prod
    ```
 
 ### Environment-Specific Deployment

@@ -488,10 +488,10 @@ deploy:
 
 ```bash
 # Verify AWS credentials
-aws sts get-caller-identity
+aws sts get-caller-identity --no-cli-pager
 
 # Update kubeconfig
-aws eks update-kubeconfig --region us-east-1 --name feedbackhub-prod
+aws eks --no-cli-pager --region us-east-1 update-kubeconfig --name feedbackhub-prod
 
 # Check cluster status
 kubectl cluster-info
