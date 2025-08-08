@@ -22,7 +22,7 @@ data "aws_region" "current" {}
 
 # Data source for existing KMS key (if not creating new one)
 data "aws_kms_key" "existing_eks" {
-  count = var.create_kms_key ? 0 : 1
+  count  = var.create_kms_key ? 0 : 1
   key_id = "alias/eks/${var.cluster_name}"
 }
 
@@ -30,7 +30,7 @@ data "aws_kms_key" "existing_eks" {
 # Only create if it doesn't already exist
 resource "aws_kms_key" "eks" {
   count = var.create_kms_key ? 1 : 0
-  
+
   description             = "EKS Secret Encryption Key for ${var.cluster_name}"
   deletion_window_in_days = 7
   enable_key_rotation     = true
@@ -42,7 +42,7 @@ resource "aws_kms_key" "eks" {
 
 resource "aws_kms_alias" "eks" {
   count = var.create_kms_key ? 1 : 0
-  
+
   name          = "alias/${var.cluster_name}-eks"
   target_key_id = aws_kms_key.eks[0].key_id
 }

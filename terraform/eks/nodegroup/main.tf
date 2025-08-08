@@ -82,7 +82,7 @@ resource "aws_eks_node_group" "main" {
   cluster_name    = var.cluster_name
   node_group_name = each.key
   node_role_arn   = aws_iam_role.node_group.arn
-  subnet_ids      = var.public_subnet_ids  # Changed to public for no-NAT architecture
+  subnet_ids      = var.public_subnet_ids # Changed to public for no-NAT architecture
 
   # Scaling configuration
   scaling_config {
@@ -111,7 +111,7 @@ resource "aws_eks_node_group" "main" {
   dynamic "remote_access" {
     for_each = each.value.key_name != null ? [1] : []
     content {
-      ec2_ssh_key = each.value.key_name
+      ec2_ssh_key               = each.value.key_name
       source_security_group_ids = [var.node_security_group_id]
     }
   }

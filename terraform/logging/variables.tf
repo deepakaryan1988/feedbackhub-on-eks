@@ -164,20 +164,20 @@ variable "loki_security_context" {
 variable "loki_container_security_context" {
   description = "Container security context for Loki"
   type = object({
-    runAsUser              = number
-    runAsGroup             = number
-    runAsNonRoot           = bool
-    readOnlyRootFilesystem = bool
+    runAsUser                = number
+    runAsGroup               = number
+    runAsNonRoot             = bool
+    readOnlyRootFilesystem   = bool
     allowPrivilegeEscalation = bool
     capabilities = object({
       drop = list(string)
     })
   })
   default = {
-    runAsUser              = 10001
-    runAsGroup             = 10001
-    runAsNonRoot           = true
-    readOnlyRootFilesystem = true
+    runAsUser                = 10001
+    runAsGroup               = 10001
+    runAsNonRoot             = true
+    readOnlyRootFilesystem   = true
     allowPrivilegeEscalation = false
     capabilities = {
       drop = ["ALL"]
@@ -265,13 +265,13 @@ variable "loki_config" {
       alertmanager_url = string
     })
     limits_config = object({
-      enforce_metric_name                = bool
-      reject_old_samples                 = bool
-      reject_old_samples_max_age         = string
-      ingestion_rate_mb                  = number
-      ingestion_burst_size_mb            = number
-      max_concurrent_tail_requests       = number
-      max_cache_freshness_per_query      = string
+      enforce_metric_name           = bool
+      reject_old_samples            = bool
+      reject_old_samples_max_age    = string
+      ingestion_rate_mb             = number
+      ingestion_burst_size_mb       = number
+      max_concurrent_tail_requests  = number
+      max_cache_freshness_per_query = string
     })
   })
   default = {
@@ -314,13 +314,13 @@ variable "loki_config" {
       alertmanager_url = "http://prometheus-kube-prometheus-alertmanager.monitoring.svc.cluster.local:9093"
     }
     limits_config = {
-      enforce_metric_name                = false
-      reject_old_samples                 = true
-      reject_old_samples_max_age         = "168h"
-      ingestion_rate_mb                  = 4
-      ingestion_burst_size_mb            = 6
-      max_concurrent_tail_requests       = 10
-      max_cache_freshness_per_query      = "10m"
+      enforce_metric_name           = false
+      reject_old_samples            = true
+      reject_old_samples_max_age    = "168h"
+      ingestion_rate_mb             = 4
+      ingestion_burst_size_mb       = 6
+      max_concurrent_tail_requests  = 10
+      max_cache_freshness_per_query = "10m"
     }
   }
 }
@@ -328,13 +328,13 @@ variable "loki_config" {
 variable "loki_service" {
   description = "Loki service configuration"
   type = object({
-    type = string
-    port = number
+    type        = string
+    port        = number
     annotations = map(string)
   })
   default = {
-    type = "ClusterIP"
-    port = 3100
+    type        = "ClusterIP"
+    port        = 3100
     annotations = {}
   }
 }
@@ -450,20 +450,20 @@ variable "promtail_security_context" {
 variable "promtail_container_security_context" {
   description = "Container security context for Promtail"
   type = object({
-    runAsUser              = number
-    runAsGroup             = number
-    runAsNonRoot           = bool
-    readOnlyRootFilesystem = bool
+    runAsUser                = number
+    runAsGroup               = number
+    runAsNonRoot             = bool
+    readOnlyRootFilesystem   = bool
     allowPrivilegeEscalation = bool
     capabilities = object({
       drop = list(string)
     })
   })
   default = {
-    runAsUser              = 0
-    runAsGroup             = 0
-    runAsNonRoot           = false
-    readOnlyRootFilesystem = true
+    runAsUser                = 0
+    runAsGroup               = 0
+    runAsNonRoot             = false
+    readOnlyRootFilesystem   = true
     allowPrivilegeEscalation = false
     capabilities = {
       drop = ["ALL"]
@@ -512,7 +512,7 @@ variable "promtail_config" {
       job_name = string
       static_configs = list(object({
         targets = list(string)
-        labels = map(string)
+        labels  = map(string)
       }))
       pipeline_stages = list(any)
     }))
@@ -730,43 +730,43 @@ variable "fluent_bit_config" {
   type        = any
   default = {
     service = {
-      Flush         = 1
-      Log_Level     = "info"
-      Daemon        = "off"
-      Parsers_File  = "parsers.conf"
-      HTTP_Server   = "On"
-      HTTP_Listen   = "0.0.0.0"
-      HTTP_Port     = 2020
+      Flush        = 1
+      Log_Level    = "info"
+      Daemon       = "off"
+      Parsers_File = "parsers.conf"
+      HTTP_Server  = "On"
+      HTTP_Listen  = "0.0.0.0"
+      HTTP_Port    = 2020
     }
     inputs = [
       {
-        Name = "tail"
-        Path = "/var/log/containers/*.log"
-        Parser = "cri"
-        Tag = "kube.*"
-        Mem_Buf_Limit = "50MB"
+        Name            = "tail"
+        Path            = "/var/log/containers/*.log"
+        Parser          = "cri"
+        Tag             = "kube.*"
+        Mem_Buf_Limit   = "50MB"
         Skip_Long_Lines = "On"
       }
     ]
     filters = [
       {
-        Name = "kubernetes"
-        Match = "kube.*"
-        Kube_URL = "https://kubernetes.default.svc:443"
-        Kube_CA_File = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+        Name            = "kubernetes"
+        Match           = "kube.*"
+        Kube_URL        = "https://kubernetes.default.svc:443"
+        Kube_CA_File    = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
         Kube_Token_File = "/var/run/secrets/kubernetes.io/serviceaccount/token"
         Kube_Tag_Prefix = "kube.var.log.containers."
-        Merge_Log = "On"
-        Keep_Log = "Off"
+        Merge_Log       = "On"
+        Keep_Log        = "Off"
       }
     ]
     outputs = [
       {
-        Name = "loki"
-        Match = "*"
-        Host = "loki"
-        Port = 3100
-        Labels = "job=fluent-bit"
+        Name                   = "loki"
+        Match                  = "*"
+        Host                   = "loki"
+        Port                   = 3100
+        Labels                 = "job=fluent-bit"
         Auto_Kubernetes_Labels = "on"
       }
     ]
@@ -902,13 +902,13 @@ variable "gateway_resources" {
 variable "gateway_service" {
   description = "Gateway service configuration"
   type = object({
-    type = string
-    port = number
+    type        = string
+    port        = number
     annotations = map(string)
   })
   default = {
-    type = "ClusterIP"
-    port = 80
+    type        = "ClusterIP"
+    port        = 80
     annotations = {}
   }
 }

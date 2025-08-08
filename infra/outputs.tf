@@ -191,14 +191,14 @@ output "access_commands" {
   description = "Quick access commands for the infrastructure"
   value = {
     update_kubeconfig = "aws eks update-kubeconfig --region ${coalesce(var.region, var.aws_region)} --name ${local.cluster_name}"
-    
+
     # Monitoring access
     prometheus_port_forward = var.enable_monitoring ? "kubectl port-forward -n ${var.monitoring_namespace} svc/prometheus-kube-prometheus-prometheus 9090:9090" : "Monitoring not enabled"
     grafana_port_forward    = var.enable_monitoring ? "kubectl port-forward -n ${var.monitoring_namespace} svc/grafana 3000:80" : "Monitoring not enabled"
-    
+
     # Logging access
     loki_port_forward = var.enable_logging ? "kubectl port-forward -n ${var.logging_namespace} svc/loki 3100:3100" : "Logging not enabled"
-    
+
     # General cluster info
     get_nodes    = "kubectl get nodes"
     get_pods_all = "kubectl get pods --all-namespaces"
@@ -216,27 +216,27 @@ output "infrastructure_summary" {
       endpoint = module.eks_cluster.cluster_endpoint
       region   = coalesce(var.region, var.aws_region)
     }
-    
+
     network = {
-      vpc_id              = module.network.vpc_id
-      vpc_cidr            = module.network.vpc_cidr
-      availability_zones  = length(module.network.private_subnet_ids)
-      
+      vpc_id             = module.network.vpc_id
+      vpc_cidr           = module.network.vpc_cidr
+      availability_zones = length(module.network.private_subnet_ids)
+
     }
-    
+
     node_groups = {
-      count           = length(local.active_node_groups)
-      instance_types  = var.node_group_instance_types
-      spot_enabled    = var.enable_spot_instances
+      count          = length(local.active_node_groups)
+      instance_types = var.node_group_instance_types
+      spot_enabled   = var.enable_spot_instances
     }
-    
+
     components = {
       # alb_controller = true
       # monitoring     = var.enable_monitoring
       # logging        = var.enable_logging
-      external_dns   = var.external_dns_enabled
+      external_dns = var.external_dns_enabled
     }
-    
+
     namespaces = {
       kube_system = "kube-system"
       monitoring  = var.enable_monitoring ? var.monitoring_namespace : null
@@ -250,16 +250,16 @@ output "cost_optimization" {
   description = "Cost optimization recommendations"
   value = {
     spot_instances_enabled = var.enable_spot_instances
-    
+
     storage_optimization = {
-      ebs_gp3_enabled = true
+      ebs_gp3_enabled    = true
       prometheus_storage = var.enable_monitoring ? var.prometheus_storage_size : "N/A"
       grafana_storage    = var.enable_monitoring ? var.grafana_storage_size : "N/A"
-      loki_storage      = var.enable_logging ? var.loki_storage_size : "N/A"
+      loki_storage       = var.enable_logging ? var.loki_storage_size : "N/A"
     }
     log_retention = {
-      cloudwatch_days = var.cloudwatch_log_retention_days
-      prometheus_retention = "15d"  # Default from monitoring module
+      cloudwatch_days      = var.cloudwatch_log_retention_days
+      prometheus_retention = "15d" # Default from monitoring module
     }
   }
 }
@@ -271,24 +271,24 @@ output "security_features" {
     private_endpoint_enabled = var.cluster_endpoint_private_access
     public_endpoint_enabled  = var.cluster_endpoint_public_access
     public_access_cidrs      = var.cluster_endpoint_public_access_cidrs
-    
+
     irsa_enabled = true
-    
+
     encryption = {
       cluster_secrets = var.enable_cluster_encryption
-      node_volumes   = var.enable_node_group_encryption
-      ebs_volumes    = true  # EBS CSI driver with encryption
+      node_volumes    = var.enable_node_group_encryption
+      ebs_volumes     = true # EBS CSI driver with encryption
     }
-    
+
     security_groups = {
       cluster_sg = module.eks_cluster.cluster_security_group_id
       node_sg    = module.network.node_group_security_group_id
     }
-    
+
     logging = {
       control_plane_logs = var.cluster_enabled_log_types
       cloudwatch_enabled = var.enable_cloudwatch_logging
-      loki_enabled      = var.enable_logging
+      loki_enabled       = var.enable_logging
     }
   }
 }

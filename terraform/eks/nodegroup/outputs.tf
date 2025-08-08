@@ -4,22 +4,22 @@ output "node_groups" {
   description = "Map of node group configurations and attributes"
   value = {
     for k, v in aws_eks_node_group.main : k => {
-      arn            = v.arn
-      status         = v.status
-      capacity_type  = v.capacity_type
-      instance_types = v.instance_types
-      ami_type       = v.ami_type
+      arn             = v.arn
+      status          = v.status
+      capacity_type   = v.capacity_type
+      instance_types  = v.instance_types
+      ami_type        = v.ami_type
       release_version = v.release_version
-      version        = v.version
-      
+      version         = v.version
+
       scaling_config = v.scaling_config
       update_config  = v.update_config
-      
+
       remote_access = v.remote_access
-      
+
       labels = v.labels
       taints = v.taint
-      
+
       resources = v.resources
     }
   }
@@ -39,9 +39,9 @@ output "launch_templates" {
   description = "Map of launch template configurations"
   value = {
     for k, v in aws_launch_template.node_group : k => {
-      id           = v.id
-      arn          = v.arn
-      name         = v.name
+      id             = v.id
+      arn            = v.arn
+      name           = v.name
       latest_version = v.latest_version
     }
   }
@@ -59,7 +59,7 @@ output "node_group_arns" {
 
 output "node_group_statuses" {
   description = "Map of node group statuses"
-  value       = {
+  value = {
     for k, v in aws_eks_node_group.main : k => v.status
   }
 }

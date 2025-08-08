@@ -1,5 +1,5 @@
-region             = "us-east-1"
-environment        = "prod"
+region      = "us-east-1"
+environment = "prod"
 
 # Cost toggles (enable as needed)
 enable_nat_gateway = true

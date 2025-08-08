@@ -45,14 +45,14 @@ output "grafana_service_account" {
 output "prometheus_config" {
   description = "Prometheus configuration details"
   value = {
-    enabled                = var.enable_prometheus
-    replicas              = var.prometheus_replicas
-    retention             = var.prometheus_retention
-    retention_size        = var.prometheus_retention_size
-    scrape_interval       = var.prometheus_scrape_interval
-    evaluation_interval   = var.prometheus_evaluation_interval
-    storage_class         = var.prometheus_storage.volumeClaimTemplate.spec.storageClassName
-    storage_size          = var.prometheus_storage.volumeClaimTemplate.spec.resources.requests.storage
+    enabled             = var.enable_prometheus
+    replicas            = var.prometheus_replicas
+    retention           = var.prometheus_retention
+    retention_size      = var.prometheus_retention_size
+    scrape_interval     = var.prometheus_scrape_interval
+    evaluation_interval = var.prometheus_evaluation_interval
+    storage_class       = var.prometheus_storage.volumeClaimTemplate.spec.storageClassName
+    storage_size        = var.prometheus_storage.volumeClaimTemplate.spec.resources.requests.storage
   }
 }
 
@@ -60,11 +60,11 @@ output "prometheus_config" {
 output "grafana_config" {
   description = "Grafana configuration details"
   value = {
-    enabled           = var.enable_grafana
-    admin_user        = var.grafana_admin_user
+    enabled             = var.enable_grafana
+    admin_user          = var.grafana_admin_user
     persistence_enabled = var.grafana_persistence.enabled
-    storage_class     = var.grafana_persistence.storageClassName
-    storage_size      = var.grafana_persistence.size
+    storage_class       = var.grafana_persistence.storageClassName
+    storage_size        = var.grafana_persistence.size
   }
   sensitive = true
 }
@@ -85,13 +85,13 @@ output "alertmanager_config" {
 output "components_enabled" {
   description = "Status of monitoring components"
   value = {
-    prometheus         = var.enable_prometheus
-    grafana           = var.enable_grafana
-    alertmanager      = var.enable_alertmanager
+    prometheus          = var.enable_prometheus
+    grafana             = var.enable_grafana
+    alertmanager        = var.enable_alertmanager
     prometheus_operator = var.enable_prometheus_operator
-    kube_state_metrics = var.enable_kube_state_metrics
-    node_exporter     = var.enable_node_exporter
-    thanos            = var.enable_thanos
+    kube_state_metrics  = var.enable_kube_state_metrics
+    node_exporter       = var.enable_node_exporter
+    thanos              = var.enable_thanos
   }
 }
 
@@ -114,11 +114,11 @@ output "access_urls" {
     prometheus = var.prometheus_ingress.enabled ? [
       for host in var.prometheus_ingress.hosts : "https://${host.host}"
     ] : ["Access via kubectl port-forward or ingress configuration"]
-    
+
     grafana = var.grafana_ingress.enabled ? [
       for host in var.grafana_ingress.hosts : "https://${host.host}"
     ] : ["Access via kubectl port-forward or ingress configuration"]
-    
+
     alertmanager = var.alertmanager_ingress.enabled ? [
       for host in var.alertmanager_ingress.hosts : "https://${host.host}"
     ] : ["Access via kubectl port-forward or ingress configuration"]
@@ -129,18 +129,18 @@ output "access_urls" {
 output "kubectl_commands" {
   description = "Useful kubectl commands for accessing monitoring components"
   value = {
-    prometheus_port_forward = "kubectl port-forward -n ${var.namespace} svc/prometheus-kube-prometheus-prometheus 9090:9090"
-    grafana_port_forward    = "kubectl port-forward -n ${var.namespace} svc/grafana 3000:80"
+    prometheus_port_forward   = "kubectl port-forward -n ${var.namespace} svc/prometheus-kube-prometheus-prometheus 9090:9090"
+    grafana_port_forward      = "kubectl port-forward -n ${var.namespace} svc/grafana 3000:80"
     alertmanager_port_forward = "kubectl port-forward -n ${var.namespace} svc/alertmanager-kube-prometheus-alertmanager 9093:9093"
-    
-    prometheus_logs = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=prometheus"
-    grafana_logs    = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=grafana"
+
+    prometheus_logs   = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=prometheus"
+    grafana_logs      = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=grafana"
     alertmanager_logs = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=alertmanager"
-    
-    get_pods = "kubectl get pods -n ${var.namespace}"
-    get_services = "kubectl get services -n ${var.namespace}"
+
+    get_pods       = "kubectl get pods -n ${var.namespace}"
+    get_services   = "kubectl get services -n ${var.namespace}"
     get_configmaps = "kubectl get configmaps -n ${var.namespace}"
-    get_secrets = "kubectl get secrets -n ${var.namespace}"
+    get_secrets    = "kubectl get secrets -n ${var.namespace}"
   }
 }
 
@@ -185,9 +185,9 @@ output "resource_usage" {
 output "security_context" {
   description = "Security context configuration for monitoring components"
   value = {
-    prometheus_user_id = 65534
-    grafana_user_id    = 472
-    non_root_containers = true
+    prometheus_user_id        = 65534
+    grafana_user_id           = 472
+    non_root_containers       = true
     read_only_root_filesystem = true
   }
 }

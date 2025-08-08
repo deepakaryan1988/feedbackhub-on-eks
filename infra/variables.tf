@@ -457,9 +457,9 @@ variable "ingress_annotations" {
   description = "Annotations for ingress"
   type        = map(string)
   default = {
-    "kubernetes.io/ingress.class"                = "alb"
-    "alb.ingress.kubernetes.io/scheme"           = "internet-facing"
-    "alb.ingress.kubernetes.io/target-type"     = "ip"
+    "kubernetes.io/ingress.class"           = "alb"
+    "alb.ingress.kubernetes.io/scheme"      = "internet-facing"
+    "alb.ingress.kubernetes.io/target-type" = "ip"
   }
 }
 

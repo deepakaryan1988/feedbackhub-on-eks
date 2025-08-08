@@ -54,20 +54,20 @@ output "fluent_bit_service_account" {
 output "loki_config" {
   description = "Loki configuration details"
   value = {
-    enabled           = var.enable_loki
-    chart_version     = var.loki_chart_version
+    enabled             = var.enable_loki
+    chart_version       = var.loki_chart_version
     persistence_enabled = var.loki_persistence.enabled
-    storage_class     = var.loki_persistence.storageClassName
-    storage_size      = var.loki_persistence.size
+    storage_class       = var.loki_persistence.storageClassName
+    storage_size        = var.loki_persistence.size
   }
 }
 
 output "promtail_config" {
   description = "Promtail configuration details"
   value = {
-    enabled           = var.enable_promtail
-    log_collection    = "kubernetes-pods"
-    scrape_interval   = "30s"
+    enabled         = var.enable_promtail
+    log_collection  = "kubernetes-pods"
+    scrape_interval = "30s"
   }
 }
 
@@ -83,11 +83,11 @@ output "fluent_bit_config" {
 output "components_enabled" {
   description = "Status of logging components"
   value = {
-    loki              = var.enable_loki
-    promtail          = var.enable_promtail
-    fluent_bit        = var.enable_fluent_bit
-    grafana           = var.enable_grafana_for_loki
-    gateway           = var.enable_gateway
+    loki               = var.enable_loki
+    promtail           = var.enable_promtail
+    fluent_bit         = var.enable_fluent_bit
+    grafana            = var.enable_grafana_for_loki
+    gateway            = var.enable_gateway
     cloudwatch_logging = var.enable_cloudwatch_logging
   }
 }
@@ -130,11 +130,11 @@ output "cloudwatch_log_groups" {
 output "cloudwatch_log_streams" {
   description = "CloudWatch log streams created"
   value = var.enable_cloudwatch_logging ? {
-    api_server = aws_cloudwatch_log_stream.api_server[0].name
-    audit      = aws_cloudwatch_log_stream.audit[0].name
-    authenticator = aws_cloudwatch_log_stream.authenticator[0].name
+    api_server         = aws_cloudwatch_log_stream.api_server[0].name
+    audit              = aws_cloudwatch_log_stream.audit[0].name
+    authenticator      = aws_cloudwatch_log_stream.authenticator[0].name
     controller_manager = aws_cloudwatch_log_stream.controllerManager[0].name
-    scheduler  = aws_cloudwatch_log_stream.scheduler[0].name
+    scheduler          = aws_cloudwatch_log_stream.scheduler[0].name
   } : null
 }
 
@@ -145,7 +145,7 @@ output "access_urls" {
     loki = var.loki_ingress.enabled ? [
       for host in var.loki_ingress.hosts : "https://${host.host}"
     ] : ["Access via kubectl port-forward or ingress configuration"]
-    
+
     gateway = var.gateway_ingress.enabled ? [
       for host in var.gateway_ingress.hosts : "https://${host.host}"
     ] : var.enable_gateway ? ["Access via kubectl port-forward or ingress configuration"] : ["Gateway not enabled"]
@@ -159,13 +159,13 @@ output "kubectl_commands" {
     loki_port_forward = "kubectl port-forward -n ${var.namespace} svc/loki 3100:3100"
     promtail_logs     = "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=promtail"
     fluent_bit_logs   = var.enable_fluent_bit ? "kubectl logs -n ${var.namespace} -l app.kubernetes.io/name=fluent-bit" : "Fluent Bit not enabled"
-    
-    get_pods     = "kubectl get pods -n ${var.namespace}"
-    get_services = "kubectl get services -n ${var.namespace}"
+
+    get_pods       = "kubectl get pods -n ${var.namespace}"
+    get_services   = "kubectl get services -n ${var.namespace}"
     get_configmaps = "kubectl get configmaps -n ${var.namespace}"
-    get_secrets  = "kubectl get secrets -n ${var.namespace}"
-    get_pvc      = "kubectl get pvc -n ${var.namespace}"
-    
+    get_secrets    = "kubectl get secrets -n ${var.namespace}"
+    get_pvc        = "kubectl get pvc -n ${var.namespace}"
+
     # Log queries
     loki_query_api = "curl -G -s 'http://localhost:3100/loki/api/v1/query' --data-urlencode 'query={job=\"kubernetes-pods\"}'"
     loki_labels    = "curl -s 'http://localhost:3100/loki/api/v1/labels'"
@@ -210,22 +210,22 @@ output "security_context" {
   description = "Security context configuration for logging components"
   value = {
     loki = {
-      user_id               = var.loki_security_context.runAsUser
-      group_id              = var.loki_security_context.runAsGroup
-      non_root              = var.loki_security_context.runAsNonRoot
-      read_only_root_fs     = var.loki_security_context.readOnlyRootFilesystem
+      user_id           = var.loki_security_context.runAsUser
+      group_id          = var.loki_security_context.runAsGroup
+      non_root          = var.loki_security_context.runAsNonRoot
+      read_only_root_fs = var.loki_security_context.readOnlyRootFilesystem
     }
     promtail = var.enable_promtail ? {
-      user_id               = var.promtail_security_context.runAsUser
-      group_id              = var.promtail_security_context.runAsGroup
-      non_root              = var.promtail_security_context.runAsNonRoot
-      read_only_root_fs     = var.promtail_security_context.readOnlyRootFilesystem
+      user_id           = var.promtail_security_context.runAsUser
+      group_id          = var.promtail_security_context.runAsGroup
+      non_root          = var.promtail_security_context.runAsNonRoot
+      read_only_root_fs = var.promtail_security_context.readOnlyRootFilesystem
     } : null
     fluent_bit = var.enable_fluent_bit ? {
-      user_id               = var.fluent_bit_security_context.runAsUser
-      group_id              = var.fluent_bit_security_context.runAsGroup
-      non_root              = var.fluent_bit_security_context.runAsNonRoot
-      read_only_root_fs     = var.fluent_bit_security_context.readOnlyRootFilesystem
+      user_id           = var.fluent_bit_security_context.runAsUser
+      group_id          = var.fluent_bit_security_context.runAsGroup
+      non_root          = var.fluent_bit_security_context.runAsNonRoot
+      read_only_root_fs = var.fluent_bit_security_context.readOnlyRootFilesystem
     } : null
   }
 }
@@ -249,16 +249,16 @@ output "log_retention" {
 output "integration_info" {
   description = "Integration information for other modules"
   value = {
-    loki_endpoint = "http://loki.${var.namespace}.svc.cluster.local:3100"
-    promtail_metrics_endpoint = var.enable_promtail ? "http://promtail.${var.namespace}.svc.cluster.local:3101/metrics" : null
+    loki_endpoint               = "http://loki.${var.namespace}.svc.cluster.local:3100"
+    promtail_metrics_endpoint   = var.enable_promtail ? "http://promtail.${var.namespace}.svc.cluster.local:3101/metrics" : null
     fluent_bit_metrics_endpoint = var.enable_fluent_bit ? "http://fluent-bit.${var.namespace}.svc.cluster.local:2020/api/v1/metrics/prometheus" : null
-    
+
     # For Grafana datasource configuration
     grafana_datasource_config = {
-      name = "Loki"
-      type = "loki"
-      url  = "http://loki.${var.namespace}.svc.cluster.local:3100"
-      access = "proxy"
+      name      = "Loki"
+      type      = "loki"
+      url       = "http://loki.${var.namespace}.svc.cluster.local:3100"
+      access    = "proxy"
       isDefault = false
     }
   }

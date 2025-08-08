@@ -41,17 +41,17 @@ output "cluster_oidc_issuer_url" {
 # Simplified outputs for existing cluster mode
 output "cluster_security_group_id" {
   description = "Security group ID attached to the EKS cluster"
-  value       = null  # Will be populated when cluster module is re-enabled
+  value       = null # Will be populated when cluster module is re-enabled
 }
 
 output "node_security_group_id" {
   description = "ID of the node shared security group"
-  value       = null  # Will be populated when cluster module is re-enabled
+  value       = null # Will be populated when cluster module is re-enabled
 }
 
 output "oidc_provider_arn" {
   description = "The ARN of the OIDC Provider if enabled"
-  value       = null  # Will be populated when cluster module is re-enabled
+  value       = null # Will be populated when cluster module is re-enabled
 }
 
 output "kms_key_id" {

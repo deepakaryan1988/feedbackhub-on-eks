@@ -21,14 +21,14 @@ variable "irsa_roles" {
     # Kubernetes service account details
     namespace            = string
     service_account_name = string
-    
+
     # IAM configuration
     max_session_duration = optional(number, 3600)
-    
+
     # Policy attachments
     managed_policy_arns = optional(list(string), [])
     inline_policies     = optional(map(string), {})
-    
+
     # Additional assume role conditions
     additional_conditions = optional(map(string), {})
   }))

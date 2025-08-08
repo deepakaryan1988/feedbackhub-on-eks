@@ -287,19 +287,19 @@ variable "prometheus_storage" {
 variable "prometheus_ingress" {
   description = "Ingress configuration for Prometheus"
   type = object({
-    enabled = optional(bool, false)
+    enabled          = optional(bool, false)
     ingressClassName = optional(string, "alb")
-    annotations = optional(map(string), {})
+    annotations      = optional(map(string), {})
     hosts = optional(list(object({
       host = string
       paths = list(object({
-        path = string
+        path     = string
         pathType = optional(string, "Prefix")
       }))
     })), [])
     tls = optional(list(object({
       secretName = optional(string)
-      hosts = optional(list(string))
+      hosts      = optional(list(string))
     })), [])
   })
   default = {
@@ -424,19 +424,19 @@ variable "alertmanager_storage" {
 variable "alertmanager_ingress" {
   description = "Ingress configuration for Alertmanager"
   type = object({
-    enabled = optional(bool, false)
+    enabled          = optional(bool, false)
     ingressClassName = optional(string, "alb")
-    annotations = optional(map(string), {})
+    annotations      = optional(map(string), {})
     hosts = optional(list(object({
       host = string
       paths = list(object({
-        path = string
+        path     = string
         pathType = optional(string, "Prefix")
       }))
     })), [])
     tls = optional(list(object({
       secretName = optional(string)
-      hosts = optional(list(string))
+      hosts      = optional(list(string))
     })), [])
   })
   default = {
@@ -450,14 +450,14 @@ variable "alertmanager_config" {
   default = {
     global = {
       smtp_smarthost = "localhost:587"
-      smtp_from = "alertmanager@example.org"
+      smtp_from      = "alertmanager@example.org"
     }
     route = {
-      group_by = ["alertname"]
-      group_wait = "10s"
-      group_interval = "10s"
+      group_by        = ["alertname"]
+      group_wait      = "10s"
+      group_interval  = "10s"
       repeat_interval = "1h"
-      receiver = "web.hook"
+      receiver        = "web.hook"
     }
     receivers = [
       {
@@ -523,35 +523,35 @@ variable "grafana_affinity" {
 variable "grafana_persistence" {
   description = "Persistence configuration for Grafana"
   type = object({
-    enabled = optional(bool, true)
+    enabled          = optional(bool, true)
     storageClassName = optional(string, "prometheus-gp3")
-    accessModes = optional(list(string), ["ReadWriteOnce"])
-    size = optional(string, "10Gi")
+    accessModes      = optional(list(string), ["ReadWriteOnce"])
+    size             = optional(string, "10Gi")
   })
   default = {
-    enabled = true
+    enabled          = true
     storageClassName = "prometheus-gp3"
-    accessModes = ["ReadWriteOnce"]
-    size = "10Gi"
+    accessModes      = ["ReadWriteOnce"]
+    size             = "10Gi"
   }
 }
 
 variable "grafana_ingress" {
   description = "Ingress configuration for Grafana"
   type = object({
-    enabled = optional(bool, false)
+    enabled          = optional(bool, false)
     ingressClassName = optional(string, "alb")
-    annotations = optional(map(string), {})
+    annotations      = optional(map(string), {})
     hosts = optional(list(object({
       host = string
       paths = list(object({
-        path = string
+        path     = string
         pathType = optional(string, "Prefix")
       }))
     })), [])
     tls = optional(list(object({
       secretName = optional(string)
-      hosts = optional(list(string))
+      hosts      = optional(list(string))
     })), [])
   })
   default = {
@@ -563,43 +563,43 @@ variable "grafana_ini" {
   description = "Grafana configuration (grafana.ini)"
   type = object({
     security = optional(object({
-      admin_user = optional(string, "admin")
+      admin_user     = optional(string, "admin")
       admin_password = optional(string, "admin")
     }), {})
     users = optional(object({
-      allow_sign_up = optional(bool, false)
+      allow_sign_up        = optional(bool, false)
       auto_assign_org_role = optional(string, "Viewer")
     }), {})
     auth = optional(object({
       disable_login_form = optional(bool, false)
     }), {})
     auth_anonymous = optional(object({
-      enabled = optional(bool, false)
+      enabled  = optional(bool, false)
       org_role = optional(string, "Viewer")
     }), {})
     server = optional(object({
-      root_url = optional(string, "")
+      root_url            = optional(string, "")
       serve_from_sub_path = optional(bool, false)
     }), {})
     smtp = optional(object({
-      enabled = optional(bool, false)
-      host = optional(string, "localhost:587")
-      user = optional(string, "")
-      password = optional(string, "")
+      enabled      = optional(bool, false)
+      host         = optional(string, "localhost:587")
+      user         = optional(string, "")
+      password     = optional(string, "")
       from_address = optional(string, "admin@grafana.localhost")
     }), {})
   })
   default = {
     security = {
-      admin_user = "admin"
+      admin_user     = "admin"
       admin_password = "admin"
     }
     users = {
-      allow_sign_up = false
+      allow_sign_up        = false
       auto_assign_org_role = "Viewer"
     }
     "auth.anonymous" = {
-      enabled = false
+      enabled  = false
       org_role = "Viewer"
     }
   }
@@ -608,17 +608,17 @@ variable "grafana_ini" {
 variable "additional_datasources" {
   description = "Additional datasources for Grafana"
   type = list(object({
-    name = string
-    type = string
-    url = string
-    access = optional(string, "proxy")
-    isDefault = optional(bool, false)
-    basicAuth = optional(bool, false)
-    basicAuthUser = optional(string, "")
+    name              = string
+    type              = string
+    url               = string
+    access            = optional(string, "proxy")
+    isDefault         = optional(bool, false)
+    basicAuth         = optional(bool, false)
+    basicAuthUser     = optional(string, "")
     basicAuthPassword = optional(string, "")
-    withCredentials = optional(bool, false)
-    jsonData = optional(map(any), {})
-    secureJsonData = optional(map(string), {})
+    withCredentials   = optional(bool, false)
+    jsonData          = optional(map(any), {})
+    secureJsonData    = optional(map(string), {})
   }))
   default = []
 }
@@ -629,28 +629,28 @@ variable "grafana_dashboards" {
   default = {
     default = {
       k8s-cluster-rsrc-use = {
-        gnetId = 15757
-        revision = 1
+        gnetId     = 15757
+        revision   = 1
         datasource = "Prometheus"
       }
       k8s-node-rsrc-use = {
-        gnetId = 15759
-        revision = 1
+        gnetId     = 15759
+        revision   = 1
         datasource = "Prometheus"
       }
       k8s-resources-cluster = {
-        gnetId = 15760
-        revision = 1
+        gnetId     = 15760
+        revision   = 1
         datasource = "Prometheus"
       }
       k8s-resources-namespace = {
-        gnetId = 15758
-        revision = 1
+        gnetId     = 15758
+        revision   = 1
         datasource = "Prometheus"
       }
       k8s-resources-pod = {
-        gnetId = 15761
-        revision = 1
+        gnetId     = 15761
+        revision   = 1
         datasource = "Prometheus"
       }
     }
@@ -675,10 +675,10 @@ variable "grafana_env" {
 variable "grafana_extra_configmap_mounts" {
   description = "Extra configmap mounts for Grafana"
   type = list(object({
-    name = string
+    name      = string
     mountPath = string
     configMap = string
-    readOnly = optional(bool, true)
+    readOnly  = optional(bool, true)
   }))
   default = []
 }

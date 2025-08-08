@@ -56,9 +56,9 @@ resource "helm_release" "aws_load_balancer_controller" {
   values = [
     yamlencode({
       clusterName = var.cluster_name
-      
+
       serviceAccount = {
-        create = false  # We manage the service account separately
+        create = false # We manage the service account separately
         name   = var.service_account_name
         annotations = merge(var.service_account_annotations, {
           "eks.amazonaws.com/role-arn" = var.role_arn
@@ -67,7 +67,7 @@ resource "helm_release" "aws_load_balancer_controller" {
 
       # Pod configuration
       replicaCount = var.replica_count
-      
+
       image = {
         repository = var.image_repository
         tag        = var.image_tag
@@ -86,8 +86,8 @@ resource "helm_release" "aws_load_balancer_controller" {
       securityContext = {
         allowPrivilegeEscalation = false
         readOnlyRootFilesystem   = true
-        runAsNonRoot            = true
-        runAsUser               = 65534
+        runAsNonRoot             = true
+        runAsUser                = 65534
         capabilities = {
           drop = ["ALL"]
         }
@@ -100,13 +100,13 @@ resource "helm_release" "aws_load_balancer_controller" {
 
       # Additional configuration
       region = data.aws_region.current.name
-      
+
       vpcId = var.vpc_id
 
       # Feature gates
-      enableShield     = var.enable_shield
-      enableWaf        = var.enable_waf
-      enableWafv2      = var.enable_wafv2
+      enableShield      = var.enable_shield
+      enableWaf         = var.enable_waf
+      enableWafv2       = var.enable_wafv2
       enableCertManager = var.enable_cert_manager
 
       # Ingress class configuration
@@ -125,12 +125,12 @@ resource "helm_release" "aws_load_balancer_controller" {
       logLevel = var.log_level
 
       # Metrics
-      enableMetrics = var.enable_metrics
+      enableMetrics   = var.enable_metrics
       metricsBindAddr = var.metrics_bind_addr
 
       # Health probes
       livenessProbe = {
-        failureThreshold    = 3
+        failureThreshold = 3
         httpGet = {
           path   = "/healthz"
           port   = 61779
@@ -157,16 +157,16 @@ resource "helm_release" "aws_load_balancer_controller" {
 
       # Additional arguments
       additionalArgs = var.additional_args
-      
+
       # Explicitly enable IngressClass creation via Helm chart
       createIngressClassResource = true
       ingressClass               = var.ingress_class_name
-      
+
       # Configure IngressClass as default  
       ingressClassConfig = {
         default = true
       }
-      
+
       # Configure IngressClassParams
       ingressClassParams = {
         create = var.create_ingress_class_params
@@ -192,8 +192,8 @@ resource "helm_release" "aws_load_balancer_controller" {
 
   # Clean up on destroy
   cleanup_on_fail = true
-  force_update   = false
-  recreate_pods  = false
+  force_update    = false
+  recreate_pods   = false
 }
 
 # Note: IngressClass, IngressClassParams, and CRDs are managed by the Helm chart
