@@ -1,0 +1,22 @@
+# Terraform
+**/.terraform/
+**/.terraform.*
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+
+# Terraform logs/plans
+**/*.log
+infra/plan*.out
+infra/tfplan*
+infra/plan.out
+
+# Local env
+.env
+.env.*
+
+# Node/JS
+node_modules/
+
+# macOS
+.DS_Store
