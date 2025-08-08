@@ -182,7 +182,7 @@ module "network" {
 
 # EKS Cluster Module
 module "eks_cluster" {
-  source = "../terraform/cluster"
+  source = "../terraform/eks/cluster"
 
   # Basic cluster configuration
   cluster_name    = local.cluster_name
@@ -219,7 +219,7 @@ module "eks_cluster" {
 
 # Node Groups Module
 module "node_groups" {
-  source = "../terraform/nodegroups"
+  source = "../terraform/eks/nodegroup"
 
   # Basic configuration
   cluster_name                         = local.cluster_name
@@ -374,7 +374,7 @@ resource "null_resource" "cluster_health_check" {
 
 # ALB Controller Module
 module "alb_controller" {
-  source = "../terraform/alb-controller"
+  source = "../terraform/eks/alb-ingress"
 
   # Basic configuration
   cluster_name = module.eks_cluster.cluster_id
