@@ -315,20 +315,20 @@ resource "null_resource" "cluster_health_check" {
       
       # Wait for cluster to be active
       echo "⏳ Waiting for EKS cluster to be active..."
-      aws eks --no-cli-pager --region ${data.aws_region.current.name} eks wait cluster-active --name ${local.cluster_name}
+      aws --no-cli-pager --region ${data.aws_region.current.name} eks wait cluster-active --name ${local.cluster_name}
       echo "✅ EKS cluster is active"
       
       # Wait for all node groups to be active
       echo "⏳ Waiting for node groups to be active..."
-      for nodegroup in $(aws eks list-nodegroups --cluster-name ${local.cluster_name} --region ${data.aws_region.current.name} --query 'nodegroups[]' --output text); do
+      for nodegroup in $(aws --no-cli-pager --region ${data.aws_region.current.name} eks list-nodegroups --cluster-name ${local.cluster_name} --query 'nodegroups[]' --output text); do
         echo "  - Waiting for nodegroup: $nodegroup"
-        aws eks --no-cli-pager --region ${data.aws_region.current.name} eks wait nodegroup-active --cluster-name ${local.cluster_name} --nodegroup-name $nodegroup
+        aws --no-cli-pager --region ${data.aws_region.current.name} eks wait nodegroup-active --cluster-name ${local.cluster_name} --nodegroup-name $nodegroup
       done
       echo "✅ All node groups are active"
       
       # Update kubeconfig
       echo "🔧 Updating kubeconfig..."
-      aws eks --no-cli-pager --region ${data.aws_region.current.name} eks update-kubeconfig --name ${local.cluster_name} --alias ${local.cluster_name}
+      aws --no-cli-pager --region ${data.aws_region.current.name} eks update-kubeconfig --name ${local.cluster_name} --alias ${local.cluster_name}
       
       # Wait for API server to be accessible with retries
       echo "⏳ Waiting for Kubernetes API server to be accessible..."
