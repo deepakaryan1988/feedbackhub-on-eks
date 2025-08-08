@@ -702,3 +702,36 @@ For support and questions:
 **🎯 Built with ❤️ for modern cloud-native applications**
 
 *Empowering developers with production-ready infrastructure*
+
+## ⚡ 5-Minute Smoke Test (Dev, External via ALB)
+Daytime flow (we destroy at EOD to save credits):
+```bash
+# 1) Bring up EKS + controller (ALB/Ingress toggles are ON in infra/dev.tfvars)
+make dev-up
+
+# 2) Configure kubeconfig
+aws eks update-kubeconfig --name <your-cluster-name> --region us-east-1 --no-cli-pager
+
+# 3) Deploy hello + ALB Ingress
+make ingress-on
+
+# 4) Get ALB DNS and test
+make check-lb
+kubectl -n dev get ingress
+# open/curl the ALB DNS
+Grafana/Prometheus (keep internal via port-forward to avoid a second ALB):
+
+
+kubectl -n monitoring port-forward svc/grafana 3000:80
+kubectl -n monitoring port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090
+Shutdown at EOD (saves credits):
+
+
+make dev-down
+make check-lb    # should show none
+```
+
+### Using Cursor here
+- Start changes with small prompts; prefer "patch style" edits.
+- Use `.vscode/settings.json` excludes to keep the editor snappy on macOS.
+- Follow `docs/CURSOR_RULES.md` to avoid accidental infra changes.

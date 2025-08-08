@@ -3,8 +3,10 @@ environment = "dev"
 
 # Cost awareness
 enable_nat_gateway = false
-create_alb         = false
-create_ingress     = false
+create_alb         = true
+create_ingress     = true
+enable_monitoring  = true
+enable_logging     = false
 
 # Scope down to 2 AZs to reduce resources
 availability_zones_count   = 2
@@ -15,4 +17,4 @@ enable_cloudwatch_logging  = false
 eks_node_instance_type = "t3.small"
 eks_node_min_size      = 1
 eks_node_desired_size  = 1
-eks_node_max_size      = 2
+eks_node_max_size      = 1
