@@ -730,3 +730,8 @@ Shutdown at EOD (saves credits):
 make dev-down
 make check-lb    # should show none
 ```
+
+### Using Cursor here
+- Start changes with small prompts; prefer "patch style" edits.
+- Use `.vscode/settings.json` excludes to keep the editor snappy on macOS.
+- Follow `docs/CURSOR_RULES.md` to avoid accidental infra changes.
