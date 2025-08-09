@@ -1,17 +1,8 @@
 # Terraform
-**/.terraform/
-**/.terraform.*
-**/*.tfstate
-**/*.tfstate.*
-**/*.tfplan
-**/*.tfvars
-!*.tfvars.example
-
-# Terraform logs/plans
-**/*.log
-infra/plan*.out
-infra/tfplan*
-infra/plan.out
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
 
 # Local env
 .env
