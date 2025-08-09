@@ -69,10 +69,13 @@ Open NGINX in your browser (minikube will proxy to the NodePort):
 minikube service web-svc
 ```
 
-Proof (screenshots):
-- Apply manifests → `screenshot/k8s/Day0-minikube/kubectl-running/Kubectl-apply.png`
-- Pods visible in Lens → `screenshot/k8s/Day0-minikube/kubectl-running/pods-in-lens.png`
-- NGINX reachable in browser → `screenshot/k8s/Day0-minikube/nginx-running-web/nginix-running-on-web.png`
+Proof:
+
+![Apply manifests](../../screenshot/k8s/Day0-minikube/kubectl-running/Kubectl-apply.png)
+
+![Pods visible in Lens](../../screenshot/k8s/Day0-minikube/kubectl-running/pods-in-lens.png)
+
+![NGINX reachable in browser](../../screenshot/k8s/Day0-minikube/nginx-running-web/nginix-running-on-web.png)
 
 ---
 
@@ -94,8 +97,10 @@ kubectl get pods -w
 ```
 
 Proof:
-- Scale command → `screenshot/k8s/Day0-minikube/scaling/scaling-command.png`
-- Pods increased in Lens → `screenshot/k8s/Day0-minikube/scaling/scaling-proof-on-lens-pods-increased.png`
+
+![Scale command](../../screenshot/k8s/Day0-minikube/scaling/scaling-command.png)
+
+![Pods increased in Lens](../../screenshot/k8s/Day0-minikube/scaling/scaling-proof-on-lens-pods-increased.png)
 
 ---
 
@@ -121,8 +126,10 @@ kubectl rollout undo deploy/web
 ```
 
 Proof:
-- Rollout in terminal → `screenshot/k8s/Day0-minikube/rolling-updates/rolling-updates-cmd.png`
-- New pods in Lens → `screenshot/k8s/Day0-minikube/rolling-updates/new-pods-lens.png`
+
+![Rollout in terminal](../../screenshot/k8s/Day0-minikube/rolling-updates/rolling-updates-cmd.png)
+
+![New pods in Lens](../../screenshot/k8s/Day0-minikube/rolling-updates/new-pods-lens.png)
 
 ---
 
@@ -134,8 +141,10 @@ kubectl delete -f service.yaml -f deployment.yaml
 ```
 
 Proof:
-- Delete command → `screenshot/k8s/Day0-minikube/deleted/deleted-cmd.png`
-- Lens shows no pods → `screenshot/k8s/Day0-minikube/deleted/no-pods-available-lens.png`
+
+![Delete command](../../screenshot/k8s/Day0-minikube/deleted/deleted-cmd.png)
+
+![Lens shows no pods](../../screenshot/k8s/Day0-minikube/deleted/no-pods-available-lens.png)
 
 ---
 
