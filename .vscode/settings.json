@@ -1,23 +1,32 @@
 {
+  // SIMPLE APPROACH: Default to bash, manually switch to zsh when you want beauty
+  "terminal.integrated.defaultProfile.osx": "bash",
+  "terminal.integrated.profiles.osx": {
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "tools",
+      "color": "terminal.ansiGreen"
+    },
+    "Beautiful Zsh": {
+      "path": "/bin/zsh",
+      "args": ["-l"],
+      "overrideName": true,
+      "icon": "terminal-bash",
+      "color": "terminal.ansiCyan",
+      "env": {
+        "TERM_PROGRAM": "vscode",
+        "AGENT_MODE": "false"
+      }
+    }
+  },
+  // Try minimal shell integration with bash (should be safe now)
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.showWelcome": false,
+  "terminal.integrated.defaultLocation": "panel",
   "files.watcherExclude": {
-    "**/.terraform/**": true,
-    "**/node_modules/**": true,
-    "**/.git/**": true,
-    "**/dist/**": true,
-    "**/build/**": true,
-    "**/target/**": true,
-    "**/.cache/**": true
+    "**/.terraform/**": true
   },
-  "search.exclude": {
-    "**/.terraform/**": true,
-    "**/node_modules/**": true,
-    "**/dist/**": true,
-    "**/build/**": true,
-    "**/.git/**": true
-  },
-  "telemetry.telemetryLevel": "off",
-  "editor.minimap.enabled": false,
-  "editor.bracketPairColorization.enabled": false,
-  "git.autofetch": true,
-  "files.trimTrailingWhitespace": true
+  "makefile.configureOnOpen": false
 }
