@@ -1,0 +1,7 @@
+Docker & Compose
+
+- Use multi‑stage builds. Keep `node:20-alpine` base images and `NEXT_TELEMETRY_DISABLED=1`.
+- Production image should copy `.next/standalone` and `.next/static` only; avoid dev deps.
+- Health check: container exposes 3000; k8s probes hit `/api/health`.
+- Keep UID/GID non‑root (1001). Read‑only root FS where feasible.
+- Compose: `docker/docker-compose.dev.yml` for dev; avoid binding sensitive files.

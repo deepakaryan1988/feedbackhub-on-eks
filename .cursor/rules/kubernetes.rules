@@ -1,0 +1,16 @@
+Kubernetes for FeedbackHub
+
+Manifests are in `k8s/manifests/*` and `k8s/feedbackhub/*`.
+
+Guidelines
+- Never commit real secrets. Use base64‑encoded placeholders only.
+- Ensure probes hit `/api/health` on port 3000.
+- Use `readinessProbe` for rollout gating and `livenessProbe` for restarts.
+- Set resource requests/limits reasonably (e.g., 250m/256Mi -> 500m/512Mi) and tune by observation.
+- Always label with `app: feedbackhub` and the appropriate namespace.
+- For ALB Ingress, keep `alb.ingress.kubernetes.io/target-type: ip` and healthcheck annotations consistent.
+- Enforce non‑root, drop capabilities, and disable privilege escalation in pod security context.
+
+Common Tasks
+- Update image: change `image: <account>.dkr.ecr.<region>.amazonaws.com/feedbackhub:<tag>` in the Deployment.
+- Add env: prefer ConfigMap for non‑secret, Secret for sensitive. Reference via `valueFrom`.

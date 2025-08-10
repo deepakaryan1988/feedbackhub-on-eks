@@ -1,0 +1,11 @@
+PR/Review checklist for this repo
+
+- Types & Interfaces: Public APIs typed; no `any` leaks.
+- Security: No secrets; input validated; safe errors.
+- Performance: Avoid N+1; add indexes where needed.
+- Accessibility: Semantic HTML; proper labels for forms.
+- Observability: Meaningful logs; no secrets in logs.
+- Infra: K8s manifests valid; probes correct; limits set.
+- Terraform: `fmt` + `validate`; versions pinned.
+- Docker: Uses multi‑stage; no dev deps in prod image.
+- Docs: Update `README.md` when behavior changes.

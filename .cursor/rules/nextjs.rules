@@ -1,0 +1,24 @@
+Project: Next.js 14 app router + TypeScript
+
+Responsibilities
+- Prefer server components. Use `"use client"` only when hooks, refs, or event handlers are required.
+- Keep API routes under `app/api/*` lean and side‑effect free except for I/O.
+- Centralize shared utilities under `app/lib/*`.
+
+API Route Guidelines
+- Validate request JSON; return 400 for missing fields.
+- Use `NextResponse.json` with typed generics for responses.
+- Catch and map errors to 5xx; never leak stack traces.
+
+MongoDB
+- Use the connection utilities in `app/lib/mongodb.ts`.
+- Ensure `MONGODB_URI` is required. Do not create new clients per request.
+- When listing feedbacks, sort by `createdAt` desc and paginate.
+
+UI
+- Stick to existing `app/components/*` patterns and Tailwind classes in `app/globals.css`.
+- Keep components pure; lift state up, avoid prop drilling via context only when needed.
+
+Performance
+- Use dynamic `force-static`/`force-dynamic` only intentionally.
+- Avoid loading large libraries on the client.

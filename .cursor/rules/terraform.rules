@@ -1,0 +1,8 @@
+Terraform for EKS and Network
+
+- Use version constraints as set in `terraform/*.tf` files.
+- Never commit state files; prefer remote state (S3 + DynamoDB) in real environments.
+- Modules: continue using `terraform-aws-modules/eks` with locked versions.
+- Variables: keep defaults minimal; document required vars in `variables.tf`.
+- Tags: ensure `Project=feedbackhub` and `Env` propagate.
+- Run `terraform fmt` and `terraform validate` before committing.

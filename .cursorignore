@@ -1,0 +1,44 @@
+# Keep AI context tight and fast
+
+# Node/Next
+node_modules/
+.next/
+.out/
+coverage/
+
+# Environment
+.env
+.env.*
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Docker
+**/node_modules/
+**/.next/
+docker/*.log
+
+# Kubernetes
+k8s/**/README.md
+
+# Terraform & state (do not index large state)
+*.tfstate
+*.tfstate.backup
+.terraform/
+**/.terraform/
+
+# GitHub images and screenshots
+screenshot/
+
+# Git internals
+.git/
+.gitignore
+
+# Build artifacts
+build/
+dist/
+
+# Secrets templates (allow env.example)
+!.env.example
