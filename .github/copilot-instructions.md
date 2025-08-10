@@ -52,16 +52,16 @@ FeedbackHub-on-EKS is a production-grade feedback platform built with **Next.js*
 
 ## 3️⃣ Repository Structure
 ```
-/app/                # Next.js app directory (pages, API routes, components, hooks, lib, types)
-/docker/             # Dockerfiles and compose files for local/dev/prod
-/docs/               # Architecture, setup, and onboarding documentation
-/infra/              # Parent Terraform for controlling modular infra
-/scripts/            # Shell scripts for build, test, and setup
-/terraform/          # Modular Terraform (alb, eks, cloudwatch, secrets, etc.)
-/helm/               # Helm charts for Kubernetes deployments
-/k8s/                # Raw Kubernetes manifests (if any)
-/monitoring/         # Prometheus, Grafana, Loki configs
-/lambda/             # AWS Lambda functions (e.g., Bedrock log summarizer)
+/ app/                # Next.js app directory (pages, API routes, components, hooks, lib, types)
+/ docker/             # Dockerfiles and compose files for local/dev/prod
+/ docs/               # Architecture, setup, and onboarding documentation
+/ infra/              # Parent Terraform for controlling modular infra
+/ scripts/            # Shell scripts for build, test, and setup
+/ terraform/          # Modular Terraform (alb, eks, cloudwatch, secrets, etc.)
+/ helm/               # Helm charts for Kubernetes deployments
+/ k8s/                # Raw Kubernetes manifests (if any)
+/ monitoring/         # Prometheus, Grafana, Loki configs
+/ lambda/             # AWS Lambda functions (e.g., Bedrock log summarizer)
 public/              # Static assets (images, favicon, etc.)
 package.json         # Project dependencies and scripts
 README.md            # Project overview and quickstart
@@ -84,9 +84,9 @@ README.md            # Project overview and quickstart
 ---
 
 ## 5️⃣ Naming Conventions
-- **Branches:**  
-  - `feature/...` → new features  
-  - `fix/...` → bug fixes  
+- **Branches:**
+  - `feature/...` → new features
+  - `fix/...` → bug fixes
 - ✅ Use AWS best practices, modular Terraform
 - ✅ Maintain `README.md` with roadmap updates
 **Don’t:**
@@ -106,49 +106,3 @@ To maximize productivity and clarity, this project supports dedicated Copilot/AI
 - When starting a new task, specify the subagent/role in your prompt for best results (e.g., “DevOps subagent: create a new ECS service module in Terraform”).
 
 This approach ensures that Copilot/AI responses are tailored, actionable, and aligned with best practices for each domain.
-
-
-
-## Workflow: Markdown Todo List Protocol
-
-**Copilot must automatically update and display the markdown todo list after every step, immediately after completing each action, so the user always sees the current status in real time.**
-**Always create a markdown todo list before taking any action.**
-  - Break down the solution into clear, incremental steps (e.g., for EKS, Helm, Terraform, Kubernetes, monitoring, etc.).
-  - Use standard markdown format for todo lists (with `- [ ]` for incomplete and `- [x]` for completed steps).
-  - After each step, update the todo list by checking off the completed step (`- [x]`).
-  - Always display the updated todo list to the user after each step, so progress is visible and real-time.
-  - For long or complex infra/app tasks, use emoji (✅, ⏳, 🚧) or progress bars to make status visually clear.
-  - If a step fails, display the error, update the todo list to reflect the failure, and attempt to resolve the issue before proceeding.
-  - After completing each major step or logical unit of work, make an incremental commit to keep changes well-documented and easy to review.
-  - If you need to pause your work, note the last completed step. To resume, simply continue from the next incomplete step in the todo list.
-  - If multiple contributors are working on the same issue, assign steps, update the todo list collaboratively, and communicate progress frequently to avoid duplication.
-  - After all steps are checked off, review the solution, check for edge cases (e.g., Helm chart validation, Kubernetes resource status, monitoring dashboards), and document any lessons learned or follow-up actions.
-
-**Example Todo List:**
-```markdown
-- [ ] Step 1: Provision EKS cluster with Terraform
-- [ ] Step 2: Deploy app using Helm chart
-- [ ] Step 3: Validate Kubernetes manifests
-- [ ] Step 4: Set up Prometheus, Grafana, Loki monitoring stack
-- [ ] Step 5: Finalize and review
-```
-
-**Example After Completing Step 1:**
-```markdown
-- [x] Step 1: Provision EKS cluster with Terraform
-- [ ] Step 2: Deploy app using Helm chart
-- [ ] Step 3: Validate Kubernetes manifests
-- [ ] Step 4: Set up Prometheus, Grafana, Loki monitoring stack
-- [ ] Step 5: Finalize and review
-```
-
-**For complex tasks:**
-```markdown
-- [x] Step 1: Setup Terraform modules (✅)
-- [x] Step 2: Deploy Helm chart (✅)
-- [ ] Step 3: Test app and monitoring (⏳)
-- [ ] Step 4: Document and clean up (🚧)
-```
-
-You may enhance this but don't delete it. (See <attachments> above for file contents. You may not need to search or read the file again.)
-````
