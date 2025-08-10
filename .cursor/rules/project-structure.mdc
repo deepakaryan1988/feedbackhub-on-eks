@@ -1,0 +1,18 @@
+---
+alwaysApply: true
+description: High-level project structure map to speed up AI navigation
+---
+
+### Project Structure
+
+- **App (Next.js)**: `app/**` — pages, API routes under `app/api/**`, shared libs under `app/lib/**`.
+- **Containers**: `docker/**` — dev compose, Docker build context.
+- **Kubernetes**: `k8s/**` — base manifests; probes to `/api/health` on port 3000.
+- **Terraform**: `terraform/**` — EKS and networking; versions pinned.
+- **Scripts**: `scripts/**` — helper scripts (CI/dev).
+- **Env**: `env.example` is the source of truth; never commit `.env`.
+- **Docs**: `README.md` for setup/run/deploy.
+
+Entry points:
+- `app/api/health/route.ts` for health checks
+- `app/page.tsx` for main UI
