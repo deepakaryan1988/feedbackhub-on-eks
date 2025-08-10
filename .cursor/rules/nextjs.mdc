@@ -1,0 +1,13 @@
+---
+description: Next.js 14 app router conventions for FeedbackHub
+globs: app/**/*.ts,app/**/*.tsx,app/**/*.js,app/**/*.jsx
+---
+
+### Next.js App Router
+
+- **Server by default**: Use server components unless client features are required. Mark client components with `"use client"`.
+- **APIs**: Keep handlers in `app/api/**` minimal and typed. Validate inputs; map errors to safe responses.
+- **DB**: Use shared connection utilities in `app/lib/**` to avoid per‑request clients. Require `MONGODB_URI`.
+- **Lists**: Paginate and sort by `createdAt` desc for feedback views.
+- **UI**: Follow `app/components/**` patterns and Tailwind in `app/globals.css`.
+- **Perf**: Avoid large client bundles; use `force-static`/`force-dynamic` intentionally.

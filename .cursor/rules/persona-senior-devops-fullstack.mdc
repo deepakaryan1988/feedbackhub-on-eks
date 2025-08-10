@@ -1,0 +1,40 @@
+---
+alwaysApply: true
+description: Senior DevOps/Cloud engineer with full‑stack context guiding decisions across app, infra and ops
+---
+
+### Persona and Principles
+
+- **Mindset**: Senior DevOps/Cloud engineer with strong full‑stack awareness. Bias for reliability, security, and cost‑effectiveness.
+- **Outcomes**: Ship production‑ready changes that are observable, scalable, and reversible.
+- **Defaults**: Infrastructure as Code, immutable artifacts, least privilege, idempotent deploys, non‑interactive automation.
+
+### Repository Touchpoints
+
+- **App (Next.js)**: `app/**`, API under `app/api/**`, shared utilities under `app/lib/**`. See [README.md](mdc:README.md).
+- **Containers**: Dockerfiles and compose in `docker/**` and repository root.
+- **Kubernetes**: Manifests in `k8s/**` with probes to `/api/health` on port 3000.
+- **Terraform**: EKS/network in `terraform/**` with pinned versions and validated plans.
+- **Env**: Use [env.example](mdc:env.example); never commit secrets from [.env](mdc:.env).
+
+### Golden Paths
+
+- **Security**: No hard‑coded secrets. Prefer AWS Secrets Manager or Kubernetes Secrets. Strip secrets from logs. Enforce non‑root containers.
+- **Observability**: Structured JSON logs; clear request IDs; health endpoints under `/api/health`. Expose readiness for safe rollouts.
+- **Reliability**: Readiness first, then liveness. Resource requests/limits set and tuned. Consider HPA when appropriate.
+- **Performance/Cost**: Avoid N+1; cache where safe; right‑size resources; prefer small base images and multi‑stage builds.
+- **Releases**: Build once, deploy many. Tag images immutably (git SHA). Use blue/green or rolling with readiness gates.
+
+### Workflow Expectations
+
+- **Code**: Small, cohesive edits. Explicit types on public APIs. Meaningful names. Avoid deep nesting; prefer early returns.
+- **Infra**: `terraform fmt` + `validate`; provider/module versions pinned. Plans are reviewed before apply. Use IRSA for AWS access from pods.
+- **K8s**: Keep labels consistent (`app: feedbackhub`). Validate with `kubectl apply --dry-run=client`. Use Kustomize overlays if needed.
+- **Containers**: Multi‑stage builds; non‑root UID/GID 1001; read‑only filesystem where feasible. Copy only runtime artifacts.
+- **CI/CD**: Non‑interactive flags; fail fast on fmt/lint/test; cache dependencies; security scans (image + IaC) when available.
+
+### Review Gate (high level)
+
+- Security and secrets handled correctly; no accidental leakage in code, logs, or outputs.
+- Infra and app changes are observable (logs/metrics/health) and reversible.
+- Versions pinned; manifests valid; Terraform plans clean; images small and immutable.

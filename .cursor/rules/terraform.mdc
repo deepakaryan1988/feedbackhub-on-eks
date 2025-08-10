@@ -1,0 +1,13 @@
+---
+description: Terraform standards for EKS and networking
+globs: terraform/**/*.tf
+---
+
+### Terraform Standards
+
+- **Versions**: Pin Terraform and provider/module versions. Document required versions in `terraform/*.tf`.
+- **Workflow**: `terraform fmt` and `terraform validate` before plan. Plans should be reviewed; applies are intentional.
+- **State**: Keep state secure; do not commit `terraform.tfstate`. Prefer remote state for teams.
+- **Modules**: Continue using `terraform-aws-modules/eks` with locked versions. Propagate `Project=feedbackhub` and `Env` tags.
+- **Variables**: Keep defaults minimal; document required vars in `variables.tf`. Avoid secrets as plain vars.
+- **Security**: IAM least privilege; use IRSA for pod‑level AWS access.

@@ -1,0 +1,16 @@
+---
+description: Docker and Compose guidance for building FeedbackHub images
+globs: **/Dockerfile*,**/docker-compose*.yml,**/docker-compose*.yaml,**/compose*.yml,**/compose*.yaml,docker/**
+---
+
+### Containers
+
+- **Base Images**: Prefer slim/alpine (e.g., node:20-alpine). Disable telemetry via `NEXT_TELEMETRY_DISABLED=1`.
+- **Multi‑stage**: Build in one stage, copy only runtime artifacts (`.next/standalone`, `.next/static`) into a small runtime stage.
+- **Security**: Use non‑root UID/GID 1001; read‑only root FS when feasible. Do not bake secrets into images.
+- **Health**: Expose 3000; app health endpoint is `/api/health`.
+- **Tags**: Use immutable tags (git SHA). Push to ECR with scanning enabled.
+
+### Compose
+
+- Dev compose at [docker/docker-compose.dev.yml](mdc:docker/docker-compose.dev.yml). Avoid binding sensitive files.

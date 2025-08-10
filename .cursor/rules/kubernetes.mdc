@@ -1,0 +1,21 @@
+---
+description: Kubernetes conventions for FeedbackHub on EKS
+globs: k8s/**/*.yaml,k8s/**/*.yml
+---
+
+### Kubernetes on EKS
+
+- **Namespaces/Labels**: Always label with `app: feedbackhub`; set meaningful `env` and `version` labels.
+- **Probes**: Readiness and liveness hit `/api/health` on container port 3000. Readiness must gate rollouts.
+- **Security**: Run as non‑root; drop capabilities; disable privilege escalation. Use read‑only root FS when possible.
+- **Resources**: Set requests/limits (e.g., 250m/256Mi → 500m/512Mi as a starting band). Tune from metrics.
+- **Ingress (ALB)**: Keep `alb.ingress.kubernetes.io/target-type: ip` and consistent healthcheck annotations. TLS via ACM.
+- **Service Accounts**: Prefer IRSA for AWS permissions; avoid node‑wide credentials.
+- **HPA/Scaling**: Add HPA when traffic/load warrants. Ensure metrics server availability.
+- **Rollouts**: Use `maxUnavailable=0` and `maxSurge=1` for safer upgrades if SLOs demand.
+
+### Common Tasks
+
+- **Update image**: edit Deployment `image: <account>.dkr.ecr.<region>.amazonaws.com/feedbackhub:<tag>`.
+- **Add configuration**: ConfigMap for non‑secret; Secret for sensitive; mount or env `valueFrom`.
+- **Validate**: `kubectl kustomize k8s/ | kubectl apply --dry-run=client -f -` before real apply.

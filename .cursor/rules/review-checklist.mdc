@@ -1,0 +1,12 @@
+---
+description: PR/Review checklist
+---
+
+- **Types**: Public APIs typed; no `any` leaks.
+- **Security**: No secrets in code/logs; inputs validated; least privilege IAM.
+- **Performance**: Avoid N+1; indexes where needed; right‑sized k8s resources.
+- **Infra**: K8s manifests valid; probes correct; limits set; IRSA where needed.
+- **Terraform**: `fmt` + `validate`; versions pinned; plan is clean.
+- **Docker**: Multi‑stage; non‑root; minimal runtime; no dev deps in prod image.
+- **Observability**: Meaningful, structured logs; health endpoints in place.
+- **Docs**: Update [README.md](mdc:README.md) for notable behavior or ops changes.
