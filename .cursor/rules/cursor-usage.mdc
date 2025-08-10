@@ -1,0 +1,13 @@
+---
+alwaysApply: true
+description: Guidelines for getting the best results from Cursor and the AI assistant
+---
+
+### Cursor Usage
+
+- **Context**: Keep diffs small and focused. Provide file paths and goals explicitly.
+- **Rules**: Prefer `.mdc` rules with `globs` for scoping; avoid global rules unless necessary.
+- **Secrets**: Never paste secrets; use placeholders and reference sources (AWS Secrets Manager/K8s Secret).
+- **Edits**: Ask the agent to apply edits via file paths; avoid dumping long code in chat.
+- **Validation**: After edits, run fmt/lint/tests/build. For infra, dry‑run K8s and validate Terraform.
+- **Repro**: Share exact commands and env vars used to reproduce issues.

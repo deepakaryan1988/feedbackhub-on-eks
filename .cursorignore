@@ -1,3 +1,41 @@
+# Keep AI context lean and relevant
+
+# Node/Next.js outputs
+.node_modules
+**/node_modules
+.next
+**/.next
+.turbo
+coverage
+
+# VCS and OS
+.git
+.DS_Store
+
+# Logs and large/binary
+**/*.log
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.webp
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+
+# Terraform
+terraform/.terraform
+terraform/*.tfstate
+terraform/*.tfstate.*
+
+# Docker build outputs (if any)
+docker/**/node_modules
+docker/**/.next
+
+# Misc
+screenshot/**
 # Keep AI context tight and fast
 
 # Node/Next

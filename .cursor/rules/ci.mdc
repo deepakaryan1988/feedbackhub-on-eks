@@ -1,0 +1,13 @@
+---
+description: CI/CD guardrails and expectations
+globs: .github/workflows/**/*.yml,.github/workflows/**/*.yaml
+---
+
+### CI/CD Expectations
+
+- **Non‑interactive**: Use `--yes`, `-input=false`, and similar flags. Fail fast.
+- **Caching**: Cache deps (npm, Docker layers, Terraform plugins) safely.
+- **Checks**: fmt/lint/test/build/security scan stages. Artifacts uploaded for troubleshooting.
+- **Immutability**: Build once, tag with git SHA, promote same image across envs.
+- **Secrets**: Pass via CI secrets store; never echo. Mask sensitive output.
+- **Terraform**: `fmt` + `validate` + `plan` in PRs; applies via protected branches.
