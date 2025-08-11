@@ -1,0 +1,9 @@
+project         = "feedbackhub"
+env             = "dev"
+aws_region      = "us-east-1"
+cluster_version = "1.30"
+instance_types  = ["t4g.small"]
+node_min        = 0
+node_desired    = 1
+node_max        = 2
+owner           = "deepak"

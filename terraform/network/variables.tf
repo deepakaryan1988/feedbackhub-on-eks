@@ -1,24 +1,20 @@
-variable "region" {
-  type    = string
-  default = "us-east-1"
+variable "project" {
+  description = "Project name for resource tagging"
+  type        = string
 }
 
 variable "env" {
-  type    = string
-  default = "dev"
+  description = "Environment name for resource tagging"
+  type        = string
 }
 
-variable "vpc_name" {
-  type    = string
-  default = "feedbackhub-dev-vpc"
+variable "aws_region" {
+  description = "AWS region for resources"
+  type        = string
 }
 
-variable "vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
-variable "public_subnet_cidrs" {
-  type    = list(string)
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
+variable "az_count" {
+  description = "Number of availability zones to use for subnets"
+  type        = number
+  default     = 2
 }
