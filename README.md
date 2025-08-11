@@ -162,6 +162,18 @@ kubectl apply -f k8s/feedbackhub/ingress-dev.yaml
 kubectl -n dev get ingress
 ```
 
+## Kubernetes — Phase 0.5 Local Ingress
+
+Local demo using Minikube + NGINX Ingress:
+
+- `dev.local/` → nginx web
+- `dev.local/api` → http-echo
+
+**Guide**: See [docs/phase0.5-local-ingress.md](docs/phase0.5-local-ingress.md)  
+**Debug**: See [docs/ingress-debug-cheatsheet.md](docs/ingress-debug-cheatsheet.md)
+
+No Makefile required. Run commands manually as shown in the guide.
+
 ## App Endpoints
 
 - `GET /api/health` — returns app health and Mongo status (best-effort)
