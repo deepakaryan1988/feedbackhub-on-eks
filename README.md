@@ -138,7 +138,7 @@ kubectl apply -f k8s/manifests/namespaces.yaml
 2) Production app (update image and secrets first):
 
 - Edit `k8s/manifests/feedbackhub-deployment.yaml`:
-  - Replace image `your-account-id.dkr.ecr.ap-south-1.amazonaws.com/feedbackhub:latest`
+  - Replace image `your-account-id.dkr.ecr.us-east-1.amazonaws.com/feedbackhub:latest`
   - Replace secret data with your base64 values, or create a secret directly:
 
 ```bash
