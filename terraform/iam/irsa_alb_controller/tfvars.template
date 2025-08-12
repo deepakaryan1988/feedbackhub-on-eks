@@ -1,0 +1,12 @@
+# Development environment variables for IRSA ALB Controller module
+
+cluster_name   = "feedbackhub-dev"
+cluster_region = "us-east-1"
+
+# OIDC provider outputs - populate these after applying the eks_oidc module
+oidc_provider_arn  = ""
+oidc_provider_url  = ""
+
+# Service account defaults (can be overridden if needed)
+service_account_namespace = "kube-system"
+service_account_name      = "aws-load-balancer-controller"
