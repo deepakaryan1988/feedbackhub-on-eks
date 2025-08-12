@@ -14,17 +14,9 @@ node_modules/
 # macOS
 .DS_Store
 
-# Cursor MCP
-.cursor/mcp.json
-
-# Terraform tfvars files (contain sensitive data)
-*.auto.tfvars
-
-# Terraform tfvars files (contain sensitive data)
+# Terraform - Sensitive files and state
 *.tfvars
 *.auto.tfvars
-
-# Terraform state and sensitive files
 *.tfstate
 *.tfstate.*
 .terraform/
