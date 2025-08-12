@@ -44,3 +44,14 @@ node_modules/
 
 # Cursor MCP
 .cursor/mcp.json
+
+# Next.js / React App
+.next/
+out/
+*.tsbuildinfo
+coverage/
+*.lcov
+
+# Docker
+*.env
+docker-compose.override.yml
