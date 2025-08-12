@@ -16,3 +16,6 @@ node_modules/
 
 # Cursor MCP
 .cursor/mcp.json
+
+# Terraform tfvars files (contain sensitive data)
+*.auto.tfvars
