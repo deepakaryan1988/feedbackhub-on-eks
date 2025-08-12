@@ -19,3 +19,12 @@ node_modules/
 
 # Terraform tfvars files (contain sensitive data)
 *.auto.tfvars
+
+# Terraform tfvars files (contain sensitive data)
+*.tfvars
+*.auto.tfvars
+
+# Terraform state and sensitive files
+*.tfstate
+*.tfstate.*
+.terraform/
