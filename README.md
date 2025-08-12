@@ -51,7 +51,7 @@ This project demonstrates our progression from container orchestration (ECS) to 
 **Phase Breakdown:**
 - **Phase 1-6:** ██████████████████████████████████████ **100%**
 - **Phase 7:**   ████████████████████████████░░░░░░░░░░ **75%**
-- **Phase 8-12:**░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ **0%**
+- **Phase 8-12:** ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ **0%**
 
 ### Key Features
 
