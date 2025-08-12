@@ -3,12 +3,17 @@
 
 FROM node:20-alpine
 
+# Install dependencies for development
+RUN apk add --no-cache libc6-compat
+
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Copy package files first for better layer caching
 COPY package*.json ./
-RUN npm ci
+
+# Install all dependencies (including dev dependencies)
+RUN npm install
 
 # Copy source code
 COPY . .
@@ -16,5 +21,9 @@ COPY . .
 # Expose port
 EXPOSE 3000
 
-# Start development server
-CMD ["npm", "run", "dev"] 
+# Set development environment
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Start development server with host binding for Docker
+CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"] 

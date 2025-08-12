@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongo:
     image: mongo:7.0
-    container_name: feedbackhub-mongo
+    container_name: feedbackhub-mongo-dev
     restart: unless-stopped
     ports:
       - "27017:27017"
@@ -11,40 +11,57 @@ services:
       - MONGO_INITDB_DATABASE=feedbackhub
     command: ["--noauth"]
     volumes:
-      - mongo_data:/data/db
-      # - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongo_data_dev:/data/db
     networks:
-      - feedbackhub-network
+      - feedbackhub-network-dev
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   app:
     build:
       context: ..
       dockerfile: docker/Dockerfile.dev
+    container_name: feedbackhub-app-dev
     ports:
       - "3000:3000"
     environment:
       # Development environment configuration
-      # Uses local MongoDB connection
       - NODE_ENV=development
       - PORT=3000
       - NEXT_TELEMETRY_DISABLED=1
       # MongoDB connection for local development
       - MONGODB_URI=mongodb://mongo:27017/feedbackhub
     volumes:
-      # Mount source code for hot reloading
-      - ../app:/app/app
-      - ../lib:/app/lib
-      - ../package.json:/app/package.json
-      - ../package-lock.json:/app/package-lock.json
+      # Mount source code for hot reloading (exclude node_modules and .next)
+      - ../app:/app/app:delegated
+      - ../lib:/app/lib:delegated
+      - ../package.json:/app/package.json:ro
+      - ../package-lock.json:/app/package-lock.json:ro
+      - ../next.config.js:/app/next.config.js:ro
+      - ../tailwind.config.js:/app/tailwind.config.js:ro
+      - ../tsconfig.json:/app/tsconfig.json:ro
+      # Exclude these directories from mounting to avoid conflicts
+      - /app/node_modules
+      - /app/.next
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     restart: unless-stopped
     networks:
-      - feedbackhub-network
+      - feedbackhub-network-dev
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 volumes:
-  mongo_data:
+  mongo_data_dev:
 
 networks:
-  feedbackhub-network:
+  feedbackhub-network-dev:
     driver: bridge 
