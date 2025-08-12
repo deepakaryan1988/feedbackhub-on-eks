@@ -34,6 +34,9 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
       # MongoDB connection for local development
       - MONGODB_URI=mongodb://mongo:27017/feedbackhub
+      # File watching improvements for macOS
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
     volumes:
       # Mount source code for hot reloading (exclude node_modules and .next)
       - ../app:/app/app:delegated
@@ -43,6 +46,9 @@ services:
       - ../next.config.js:/app/next.config.js:ro
       - ../tailwind.config.js:/app/tailwind.config.js:ro
       - ../tsconfig.json:/app/tsconfig.json:ro
+      - ../postcss.config.js:/app/postcss.config.js:ro
+      - ../.eslintrc.json:/app/.eslintrc.json:ro
+      - ../components.json:/app/components.json:ro
       # Exclude these directories from mounting to avoid conflicts
       - /app/node_modules
       - /app/.next
