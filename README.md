@@ -104,6 +104,9 @@ docker run -e MONGODB_URI="<your-uri>" -p 3000:3000 feedbackhub:latest
 
 Defaults: region `us-east-1`, cluster `feedbackhub-dev`, 1× t3.small
 
+**Note on Terraform Variables:**
+This project uses `dev.auto.tfvars` files for environment-specific variables. These files are automatically loaded by Terraform. For new environments, copy the `tfvars.template` file to `<environment_name>.auto.tfvars` and populate the values.
+
 ```bash
 # Network
 cd terraform/network
@@ -115,6 +118,21 @@ cd ../eks
 terraform init
 terraform apply -auto-approve
 
+# IAM (EKS OIDC Provider)
+cd ../iam/eks_oidc
+terraform init
+terraform apply -auto-approve
+
+# IAM (IRSA for ALB Controller)
+cd ../irsa_alb_controller
+terraform init
+terraform apply -auto-approve
+
+# EKS ALB Controller
+cd ../../eks/alb_controller
+terraform init
+terraform apply -auto-approve
+
 # Configure kubectl
 aws eks update-kubeconfig --name feedbackhub-dev --region us-east-1
 kubectl get nodes -o wide
@@ -123,7 +141,19 @@ kubectl get nodes -o wide
 Destroy (reverse order):
 
 ```bash
-cd terraform/eks && terraform destroy -auto-approve || true
+# EKS ALB Controller
+cd terraform/eks/alb_controller && terraform destroy -auto-approve || true
+
+# IAM (IRSA for ALB Controller)
+cd ../../iam/irsa_alb_controller && terraform destroy -auto-approve || true
+
+# IAM (EKS OIDC Provider)
+cd ../eks_oidc && terraform destroy -auto-approve || true
+
+# EKS
+cd ../../eks && terraform destroy -auto-approve || true
+
+# Network
 cd ../network && terraform destroy -auto-approve || true
 ```
 

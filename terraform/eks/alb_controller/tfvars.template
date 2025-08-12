@@ -1,0 +1,13 @@
+# Development environment variables for EKS ALB Controller module
+
+cluster_name   = "feedbackhub-dev"
+cluster_region = "us-east-1"
+
+# ALB Controller role ARN - populate this after applying the IRSA module
+alb_controller_role_arn = ""
+
+# VPC ID - populate this after applying the network module
+vpc_id = ""
+
+# Chart version (optional override)
+# chart_version = "1.13.4"
