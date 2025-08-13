@@ -8,6 +8,29 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 
 **This project represents our strategic migration from AWS ECS to Kubernetes (EKS), showcasing enterprise-grade DevOps practices and cloud architecture evolution.**
 
+## 🎬 **Live Demo & Showcase**
+
+> **See FeedbackHub in Action!**
+
+https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/your-username/demo-video.webm
+
+**✨ Features Demonstrated:**
+- 🎨 **Beautiful Animations**: Smooth framer-motion transitions and hover effects
+- 📝 **Real-time Feedback**: Submit and view feedback with instant updates
+- 🎯 **Responsive Design**: Works perfectly on all devices
+- ⚡ **Performance**: Fast loading with Next.js 14 optimizations
+- 🔒 **Security**: Proper validation and sanitization
+- 🎭 **Modern UI**: Clean, professional interface with Tailwind CSS
+
+**[🎥 Watch Full Demo Video](assets/demo-video.webm)** | **[🚀 Try Live App](your-deployment-url)**
+
+> **💡 To add your demo video:**
+> 1. Place your `demo-video.webm` file in the `assets/` folder
+> 2. Update the deployment URL above with your actual EKS deployment
+> 3. The video will automatically display in GitHub's README
+
+---
+
 ### 🗺️ **Project Evolution & Roadmap**
 
 > **From ECS to EKS: A Journey of Cloud-Native Evolution**
