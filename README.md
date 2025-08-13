@@ -12,7 +12,7 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 
 > **See FeedbackHub in Action!**
 
-https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/deepakaryan1988/demo-video.webm
+![FeedbackHub Demo](assets/demo.gif)
 
 **✨ Features Demonstrated:**
 - 🎨 **Beautiful Animations**: Smooth framer-motion transitions and hover effects
@@ -22,7 +22,7 @@ https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/deepakaryan1988/dem
 - 🔒 **Security**: Proper validation and sanitization
 - 🎭 **Modern UI**: Clean, professional interface with Tailwind CSS
 
-**[🎥 Watch Full Demo Video](assets/demo-video.webm)**
+**[🎥 Watch Full Demo Video](assets/demo.gif)**
 
 > **📱 Current Status:**
 > - **Demo Video**: ✅ Available and working
