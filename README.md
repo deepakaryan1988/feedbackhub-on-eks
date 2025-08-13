@@ -22,7 +22,7 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 - 🔒 **Security**: Proper validation and sanitization
 - 🎭 **Modern UI**: Clean, professional interface with Tailwind CSS
 
-**[🎥 Watch Full Demo Video](assets/demo.gif)**
+
 
 > **📱 Current Status:**
 > - **Demo Video**: ✅ Available and working
