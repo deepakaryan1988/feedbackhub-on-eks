@@ -10,6 +10,11 @@ TAG=${1:-v0.1.0}
 
 # Set variables
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+if [[ -z "$ACCOUNT_ID" ]]; then
+    echo "❌ Failed to retrieve AWS account ID. Please check your AWS credentials and permissions." >&2
+    exit 1
+fi
+
 REGION=us-east-1
 REPO=feedbackhub-web
 IMAGE=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$TAG
@@ -28,7 +33,7 @@ npm run build
 
 # Step 2: Build Docker image
 echo "🐳 Building Docker image..."
-docker build --no-cache -f docker/Dockerfile.prod -t $IMAGE .
+docker build -f docker/Dockerfile.prod -t $IMAGE .
 
 # Step 3: Login to ECR
 echo "🔐 Logging into ECR..."
