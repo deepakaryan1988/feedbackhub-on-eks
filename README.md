@@ -12,7 +12,7 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 
 > **See FeedbackHub in Action!**
 
-https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/your-username/demo-video.webm
+https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/deepakaryan1988/demo-video.webm
 
 **✨ Features Demonstrated:**
 - 🎨 **Beautiful Animations**: Smooth framer-motion transitions and hover effects
@@ -22,12 +22,12 @@ https://github.com/deepakaryan1988/feedbackhub-on-eks/assets/your-username/demo-
 - 🔒 **Security**: Proper validation and sanitization
 - 🎭 **Modern UI**: Clean, professional interface with Tailwind CSS
 
-**[🎥 Watch Full Demo Video](assets/demo-video.webm)** | **[🚀 Try Live App](your-deployment-url)**
+**[🎥 Watch Full Demo Video](assets/demo-video.webm)**
 
-> **💡 To add your demo video:**
-> 1. Place your `demo-video.webm` file in the `assets/` folder
-> 2. Update the deployment URL above with your actual EKS deployment
-> 3. The video will automatically display in GitHub's README
+> **📱 Current Status:**
+> - **Demo Video**: ✅ Available and working
+> - **Live Deployment**: 🚧 EKS deployment in progress (Phase 7)
+> - **Local Development**: ✅ Fully functional with `npm run dev`
 
 ---
 
