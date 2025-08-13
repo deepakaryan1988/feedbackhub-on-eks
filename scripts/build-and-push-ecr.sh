@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build and Push FeedbackHub to ECR
+# Build and Push FeedbackHub to ECR for ARM64 (EKS Graviton)
 # Usage: ./scripts/build-and-push-ecr.sh [tag]
 
 set -e
@@ -19,21 +19,22 @@ REGION=us-east-1
 REPO=feedbackhub-web
 IMAGE=$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO:$TAG
 
-echo "🚀 Building and pushing FeedbackHub to ECR..."
+echo "🚀 Building and pushing FeedbackHub to ECR for ARM64 (EKS Graviton)..."
 echo "Account ID: $ACCOUNT_ID"
 echo "Region: $REGION"
 echo "Repository: $REPO"
 echo "Tag: $TAG"
 echo "Image: $IMAGE"
+echo "Architecture: ARM64 (linux/arm64)"
 echo ""
 
 # Step 1: Build Next.js application
 echo "📦 Building Next.js application..."
 npm run build
 
-# Step 2: Build Docker image
-echo "🐳 Building Docker image..."
-docker build -f docker/Dockerfile.prod -t $IMAGE .
+# Step 2: Build Docker image for ARM64 (EKS Graviton)
+echo "🐳 Building Docker image for ARM64 (EKS Graviton)..."
+docker build --platform linux/arm64 -f docker/Dockerfile.prod -t $IMAGE .
 
 # Step 3: Login to ECR
 echo "🔐 Logging into ECR..."

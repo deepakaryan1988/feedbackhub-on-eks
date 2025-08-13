@@ -8,6 +8,23 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 
 **This project represents our strategic migration from AWS ECS to Kubernetes (EKS), showcasing enterprise-grade DevOps practices and cloud architecture evolution.**
 
+## 📚 **Technical Deep Dive: Hashnode Article**
+
+> **🚀 From Local Docker to AWS EKS: Building a Production-Grade MongoDB Architecture**
+
+We've documented our complete journey of building a production-grade MongoDB architecture that works seamlessly across local development and AWS production environments. This comprehensive technical article covers:
+
+- **🏗️ Architecture Evolution**: From monolithic to environment-aware design
+- **🔧 Problem Solving**: Real-world troubleshooting and solutions
+- **🔒 Security Best Practices**: IRSA, Secrets Manager, and environment isolation
+- **🐳 Docker Optimization**: Local development with proper networking
+- **☁️ AWS Integration**: EKS deployment with MongoDB Atlas
+- **📦 Build Process**: Environment-agnostic Docker images
+
+**[📖 Read the Full Article on Hashnode](https://debugdeploygrow.hashnode.dev/from-local-docker-to-aws-eks-building-a-production-grade-mongodb-architecture-for-feedbackhub)**
+
+*This article demonstrates our approach to solving complex environment management challenges while maintaining security and reliability standards.*
+
 ## 🎬 **Live Demo & Showcase**
 
 > **See FeedbackHub in Action!**

@@ -33,7 +33,7 @@ services:
       - PORT=3000
       - NEXT_TELEMETRY_DISABLED=1
       # MongoDB connection for local development
-      - MONGODB_URI=mongodb://mongo:27017/feedbackhub
+      - MONGODB_URI=mongodb://host.docker.internal:27017/feedbackhub
       # File watching improvements for macOS
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true

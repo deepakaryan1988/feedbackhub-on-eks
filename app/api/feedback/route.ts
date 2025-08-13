@@ -1,13 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getDb } from '../../lib/mongodb'
+import { getDb, mongoConfig } from '../../lib/mongodb'
 import { Feedback, FeedbackFormData, ApiResponse } from '../../types/feedback'
 
 export async function GET(): Promise<NextResponse<ApiResponse<Feedback[]>>> {
   try {
+    const config = mongoConfig()
+    
+    // Check if we're in build-time
+    if (config.strategy === 'build-time-safe') {
+      console.log('🔧 Build-time detected - returning empty feedback list')
+      return NextResponse.json({
+        success: true,
+        data: [] as Feedback[]
+      })
+    }
+
     const db = await getDb()
     const collection = db.collection('feedbacks')
     
-    const feedbacks = await collection
+    // Type assertion to handle build-time vs runtime database types
+    const feedbacks = await (collection as any)
       .find({})
       .sort({ createdAt: -1 })
       .limit(50)
@@ -31,6 +43,20 @@ export async function GET(): Promise<NextResponse<ApiResponse<Feedback[]>>> {
 
 export async function POST(request: NextRequest): Promise<NextResponse<ApiResponse<Feedback>>> {
   try {
+    const config = mongoConfig()
+    
+    // Check if we're in build-time
+    if (config.strategy === 'build-time-safe') {
+      console.log('🔧 Build-time detected - rejecting POST request')
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'API not available during build time'
+        },
+        { status: 503 }
+      )
+    }
+
     const body: FeedbackFormData = await request.json()
     
     // Validate input
@@ -53,7 +79,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
     const db = await getDb()
     const collection = db.collection('feedbacks')
     
-    const result = await collection.insertOne(feedback)
+    // Type assertion to handle build-time vs runtime database types
+    const result = await (collection as any).insertOne(feedback)
     
     const insertedFeedback: Feedback = {
       _id: result.insertedId.toString(),

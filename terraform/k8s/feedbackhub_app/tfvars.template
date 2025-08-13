@@ -1,0 +1,16 @@
+# FeedbackHub App Terraform Variables Template
+# Copy this file to terraform.tfvars and fill in your values
+# 
+# WARNING: The values below are DUMMY DATA examples. Replace with your actual values!
+
+# Required variables
+cluster_name   = "my-eks-cluster"        # DUMMY DATA - replace with your actual cluster name
+cluster_region = "us-west-2"             # DUMMY DATA - replace with your actual region
+image          = "123456789012.dkr.ecr.us-west-2.amazonaws.com/feedbackhub:latest"  # DUMMY DATA - replace with your actual image
+
+# Optional variables with defaults
+namespace       = "feedbackhub"
+service_account = "feedbackhub-app"
+replicas        = 1
+container_port  = 3000
+health_path     = "/api/health"
