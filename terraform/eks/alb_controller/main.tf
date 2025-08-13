@@ -43,11 +43,11 @@ resource "kubernetes_service_account" "alb_controller" {
 
 # Install AWS Load Balancer Controller Helm chart
 resource "helm_release" "alb_controller" {
-  name       = "aws-load-balancer-controller"
-  repository = "https://aws.github.io/eks-charts"
-  chart      = "aws-load-balancer-controller"
-  version    = var.chart_version
-  namespace  = "kube-system"
+  name             = "aws-load-balancer-controller"
+  repository       = "https://aws.github.io/eks-charts"
+  chart            = "aws-load-balancer-controller"
+  version          = var.chart_version
+  namespace        = "kube-system"
   create_namespace = false
 
   values = [yamlencode({
