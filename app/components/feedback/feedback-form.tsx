@@ -102,8 +102,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
           transition={{ delay: 0.1, duration: 0.6 }}
           className="space-y-3"
         >
-          <motion.label 
-            htmlFor="name" 
+          <motion.div 
             className="flex items-center space-x-2 text-sm font-medium text-foreground"
             animate={{
               textShadow: isHovered 
@@ -121,8 +120,8 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
             >
               <User className="h-4 w-4 text-primary" />
             </motion.div>
-            <span>Name *</span>
-          </motion.label>
+            <label htmlFor="name" className="cursor-pointer">Name *</label>
+          </motion.div>
           <div className="relative">
             <motion.input
               type="text"
@@ -181,7 +180,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
           </div>
           <AnimatePresence>
             {nameError && showNameError && (
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: -10, x: -20 }}
                 animate={{ opacity: 1, y: 0, x: 0 }}
                 exit={{ opacity: 0, y: -10, x: 20 }}
@@ -194,7 +193,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
                   <AlertCircle className="h-4 w-4" />
                 </motion.div>
                 <span>Name is required</span>
-              </motion.p>
+              </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
@@ -206,8 +205,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
           transition={{ delay: 0.2, duration: 0.6 }}
           className="space-y-3"
         >
-          <motion.label 
-            htmlFor="message" 
+          <motion.div 
             className="flex items-center space-x-2 text-sm font-medium text-foreground"
             animate={{
               textShadow: isHovered 
@@ -225,8 +223,8 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
             >
               <MessageSquare className="h-4 w-4 text-primary" />
             </motion.div>
-            <span>Message *</span>
-          </motion.label>
+            <label htmlFor="message" className="cursor-pointer">Message *</label>
+          </motion.div>
           <div className="relative">
             <motion.textarea
               id="message"
@@ -285,7 +283,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
           </div>
           <AnimatePresence>
             {messageError && showMessageError && (
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, y: -10, x: -20 }}
                 animate={{ opacity: 1, y: 0, x: 0 }}
                 exit={{ opacity: 0, y: -10, x: 20 }}
@@ -298,7 +296,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
                   <AlertCircle className="h-4 w-4" />
                 </motion.div>
                 <span>Message is required</span>
-              </motion.p>
+              </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
@@ -409,7 +407,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        <motion.p 
+        <motion.div 
           className="flex items-center justify-center space-x-2 relative z-10"
           animate={{
             textShadow: isHovered 
@@ -428,7 +426,7 @@ export default function FeedbackForm({ onSubmit, isLoading = false }: FeedbackFo
             <CheckCircle className="h-4 w-4 text-primary" />
           </motion.div>
           <span>Your feedback helps us improve. We appreciate your input!</span>
-        </motion.p>
+        </motion.div>
       </motion.div>
     </motion.div>
   )

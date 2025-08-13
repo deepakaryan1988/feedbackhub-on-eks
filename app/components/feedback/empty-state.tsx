@@ -26,14 +26,14 @@ export default function EmptyState() {
         No feedback yet
       </motion.h3>
       
-      <motion.p 
+      <motion.div 
         className="text-muted-foreground mb-6 max-w-sm mx-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
         Be the first to share your thoughts! Your feedback helps us improve and create better experiences.
-      </motion.p>
+      </motion.div>
 
       <motion.div
         className="flex items-center justify-center space-x-2 text-xs text-muted-foreground"

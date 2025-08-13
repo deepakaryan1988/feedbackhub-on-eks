@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import HeroSection from './components/layout/hero-section'
 import FeedbackForm from './components/feedback/feedback-form'
@@ -16,19 +16,7 @@ export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const { toast } = useToast()
 
-  useEffect(() => {
-    fetchFeedbacks()
-    
-    // Handle scroll to top button visibility
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400)
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const fetchFeedbacks = async () => {
+  const fetchFeedbacks = useCallback(async () => {
     setIsLoading(true)
     try {
       const response = await fetch('/api/feedback')
@@ -52,7 +40,19 @@ export default function HomePage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [toast])
+
+  useEffect(() => {
+    fetchFeedbacks()
+    
+    // Handle scroll to top button visibility
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [fetchFeedbacks])
 
   const handleSubmitFeedback = async (formData: FeedbackFormData) => {
     setIsSubmitting(true)
@@ -207,22 +207,22 @@ export default function HomePage() {
               </div>
               <span className="text-2xl font-bold text-foreground">FeedbackHub</span>
             </motion.div>
-            <motion.p 
+            <motion.div 
               className="text-lg text-muted-foreground mb-4 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.7, duration: 0.8 }}
             >
               A modern feedback platform built with Next.js and shadcn/ui
-            </motion.p>
-            <motion.p 
+            </motion.div>
+            <motion.div 
               className="text-sm text-muted-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.9, duration: 0.8 }}
             >
               © 2024 FeedbackHub. All rights reserved.
-            </motion.p>
+            </motion.div>
           </motion.div>
         </div>
       </footer>

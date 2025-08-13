@@ -194,7 +194,7 @@ export default function FeedbackCard({ feedback }: FeedbackCardProps) {
             >
               <MessageSquare className="h-5 w-5 text-primary/60 mt-0.5 flex-shrink-0 group-hover:text-primary transition-colors duration-300" />
             </motion.div>
-            <motion.p 
+            <motion.div 
               className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300"
               animate={{
                 textShadow: isHovered 
@@ -204,7 +204,7 @@ export default function FeedbackCard({ feedback }: FeedbackCardProps) {
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               {feedback.message}
-            </motion.p>
+            </motion.div>
           </div>
         </div>
 
@@ -212,7 +212,7 @@ export default function FeedbackCard({ feedback }: FeedbackCardProps) {
         <div className="mt-6 pt-4 border-t border-border/50 relative z-20">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 text-xs text-muted-foreground">
-              <motion.span 
+              <motion.div 
                 className="flex items-center space-x-1"
                 animate={{ 
                   scale: isHovered ? [1, 1.1, 1] : 1,
@@ -229,20 +229,25 @@ export default function FeedbackCard({ feedback }: FeedbackCardProps) {
                   transition={{ duration: 1, repeat: Infinity }}
                 />
                 <span>Received</span>
-              </motion.span>
+              </motion.div>
             </div>
             
             {/* Feedback Type Badge with morphing */}
             <motion.div
               className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium relative overflow-hidden"
               whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
               animate={{
                 borderRadius: isHovered 
                   ? ["50%", "30% 70% 70% 30% / 30% 30% 70% 70%"]
                   : ["30% 70% 70% 30% / 30% 30% 70% 70%", "50%"]
               }}
-              transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300,
+                duration: 1, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+              }}
             >
               <span className="relative z-10">Feedback</span>
               {isHovered && (

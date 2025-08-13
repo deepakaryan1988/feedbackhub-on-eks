@@ -170,7 +170,7 @@ export default function HeroSection() {
           </motion.h1>
         </div>
         
-        <motion.p 
+        <motion.div 
           className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function HeroSection() {
           }}
         >
           Share your thoughts, shape the future. A modern feedback platform built for the community.
-        </motion.p>
+        </motion.div>
       </motion.div>
 
       {/* CTA Button with Magnetic Effect */}
