@@ -27,7 +27,7 @@ FeedbackHub is a full-stack web application that enables users to submit and vie
 > **📱 Current Status:**
 > - **Demo Video**: ✅ Available and working
 > - **Live Deployment**: 🚧 EKS deployment in progress (Phase 7)
-> - **Local Development**: ✅ Fully functional with `npm run dev`
+> - **Local Development**: ✅ Fully functional with Docker setup or `npm run dev`
 
 ---
 
