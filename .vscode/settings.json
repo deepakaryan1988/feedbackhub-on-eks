@@ -28,5 +28,6 @@
   "files.watcherExclude": {
     "**/.terraform/**": true
   },
-  "makefile.configureOnOpen": false
+  "makefile.configureOnOpen": false,
+  "kiroAgent.configureMCP": "Disabled"
 }
