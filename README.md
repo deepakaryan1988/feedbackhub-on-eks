@@ -61,37 +61,43 @@ This project demonstrates our progression from container orchestration (ECS) to 
 | **Phase 1-3** | ✅ **COMPLETED** | AWS + ECS Foundations | 100% |
 | **Phase 4-6** | ✅ **COMPLETED** | App Migration & Diversification | 100% |
 | **Phase 7** | 🚧 **CURRENT** | EKS Mastery | 75% |
-| **Phase 8** | ⏳ **PLANNED** | Observability Stack | 0% |
-| **Phase 9** | ⏳ **PLANNED** | Security Hardening | 0% |
+| **Phase 8** | 🚧 **IN PROGRESS** | Horizontal Pod Autoscaling (HPA) & Load Testing | 70% |
+| **Phase 9** | ⏳ **NEXT** | GitOps with ArgoCD | 0% |
 | **Phase 10** | ⏳ **PLANNED** | CI/CD & GitOps | 0% |
 | **Phase 11** | ⏳ **PLANNED** | Advanced Scaling | 0% |
 | **Phase 12** | ⏳ **PLANNED** | MLOps Specialization | 0% |
 
-#### **🎯 Current Focus: Phase 7 - EKS Mastery**
+**Note**: Phase 10 moved earlier to unlock GitOps value and de-risk deployment automation before advanced scaling features.
 
-**Completed (75%):**
+#### **🎯 Current Focus: Phase 8 - Horizontal Pod Autoscaling (HPA) & Load Testing**
+
+**Completed (70%):**
 - ✅ EKS Cluster provisioning via Terraform
 - ✅ Node groups and ALB Ingress Controller
 - ✅ IRSA implementation and basic deployment
 - ✅ MongoDB Atlas integration
+- ✅ Basic deployment and health checks
 
-**In Progress (25%):**
-- 🚧 HTTPS + ACM certificate integration
-- 🚧 HPA and Cluster Autoscaler setup
-- 🚧 Load testing and performance validation
-- 🚧 Cost optimization for multi-environment
+**In Progress (30%):**
+- 🚧 HPA configuration and metrics server deployment
+- 🚧 Load testing setup and execution
+- 🚧 Scaling behavior validation and tuning
+- 🚧 Performance optimization and monitoring
 
 **[📋 View Detailed Roadmap](docs/ROADMAP.md)** - Comprehensive phase breakdown and future planning
 
 #### **📊 Visual Progress Indicator**
 
-**Overall Project Progress:** 75%
+**Overall Project Progress:** ~65%
 ████████████████████████████████████████
 
 **Phase Breakdown:**
 - **Phase 1-6:** ██████████████████████████████████████ **100%**
 - **Phase 7:**   ████████████████████████████░░░░░░░░░░ **75%**
-- **Phase 8-12:** ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ **0%**
+- **Phase 8:**   ████████████████████████████░░░░░░░░░░ **70%**
+- **Phase 9-12:** ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ **0%**
+
+**Last Updated:** Aug 19, 2025
 
 ### Key Features
 

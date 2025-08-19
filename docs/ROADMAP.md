@@ -18,14 +18,20 @@ This roadmap demonstrates our progression from AWS ECS to Kubernetes (EKS), show
 
 ## 📊 **Roadmap Progress Overview**
 
-### **Completed Phases (Phase 1-3)** ✅
-**AWS + ECS Foundations** - Successfully delivered and documented
+**Overall Completion:** ~65%  
+**Last Updated:** Aug 19, 2025
 
-### **Current Phase (Phase 7)** 🚧
-**EKS Mastery** - Active development and deployment
+### **Completed Phases (Phase 1-6)** ✅
+**AWS + ECS Foundations + App Migration** - Successfully delivered and documented
 
-### **Future Phases (Phase 8-12)** ⏳
-**Advanced Kubernetes & MLOps** - Planned and designed
+### **Current Phase (Phase 8)** 🚧
+**Horizontal Pod Autoscaling (HPA) & Load Testing** - Active development and validation
+
+### **Next Phase (Phase 9)** ⏳
+**GitOps with ArgoCD** - Planned and designed
+
+### **Future Phases (Phase 10-12)** ⏳
+**CI/CD, Advanced Scaling & MLOps** - Planned and designed
 
 ---
 
@@ -89,15 +95,42 @@ This roadmap demonstrates our progression from AWS ECS to Kubernetes (EKS), show
 
 ---
 
-### **Phase 7: EKS Mastery** 🚧 **CURRENT WORK**
+### **Phase 7: EKS Mastery** ✅ **COMPLETED**
 
-> **Status**: Active development - EKS cluster provisioning and application deployment
+> **Status**: Successfully delivered - EKS cluster provisioning and application deployment
 
-#### **Current Achievements**
+#### **Achievements Delivered**
 - ✅ **EKS Cluster Provisioning** via Terraform
 - ✅ **Node Groups** configuration (t3.small for dev)
 - ✅ **ALB Ingress Controller** setup
 - ✅ **IRSA (IAM Roles for Service Accounts)** implementation
+- ✅ **Application Deployment** and health checks
+- ✅ **MongoDB Atlas** integration
+
+---
+
+### **Phase 8: Horizontal Pod Autoscaling (HPA) & Load Testing** 🚧 **IN PROGRESS**
+
+> **Status**: Active development - Auto-scaling implementation and performance validation
+
+#### **Current Achievements**
+- ✅ **HPA Planning** and requirements definition
+- ✅ **Resource Configuration** (requests/limits set)
+- ✅ **Health Endpoints** configured and working
+- ✅ **Lens Monitoring** configured for real-time visibility
+
+#### **In Progress (30%)**
+- 🚧 **Metrics Server** deployment via Terraform
+- 🚧 **HPA Resource** creation and configuration
+- 🚧 **Load Testing** setup and execution plan
+- 🚧 **Scaling Behavior** validation and tuning
+
+#### **Acceptance Criteria**
+- **Metrics Server Available**: HPA can access CPU/memory metrics
+- **Resources Set on Pods**: Proper requests/limits configured
+- **Load Test Plan Defined**: Stepped testing (light → moderate → heavy)
+- **Scale Up/Down Observed**: HPA responds to traffic changes
+- **Performance Validated**: Scaling maintains application performance
 - ✅ **FeedbackHub Application** deployment on EKS
 - ✅ **MongoDB Atlas** connection from EKS pods
 - ✅ **Basic Ingress** and service configuration
@@ -147,9 +180,22 @@ This roadmap demonstrates our progression from AWS ECS to Kubernetes (EKS), show
 
 ---
 
-### **Phase 9: Security Hardening (DevSecOps)** ⏳ **PLANNED**
+### **Phase 9: GitOps with ArgoCD** ⏳ **NEXT**
 
-> **Status**: Design phase - Enterprise-grade security implementation
+> **Status**: Design phase - GitOps deployment automation and workflow management
+
+#### **GitOps Implementation Strategy**
+- **App-of-Apps Pattern** vs Single App decision
+- **Sync Policy** configuration and automation
+- **Rollback Process** and emergency procedures
+- **Folder Structure** and organization strategy
+
+#### **Acceptance Criteria**
+- **ArgoCD Decision Made**: App-of-apps or single app approach chosen
+- **Sync Policy Defined**: Automated sync with manual approval gates
+- **Rollback Process**: Clear procedures for deployment rollbacks
+- **Folder Structure Agreed**: Repository organization and naming conventions
+- **Environment Management**: Staging → Production promotion workflow
 
 #### **Identity & Access Management**
 - **IRSA (IAM Roles for Service Accounts)** for least privilege
@@ -177,9 +223,10 @@ This roadmap demonstrates our progression from AWS ECS to Kubernetes (EKS), show
 
 ---
 
-### **Phase 10: CI/CD & GitOps** ⏳ **PLANNED**
+### **Phase 10: CI/CD & GitOps** ⏳ **PLANNED** *(Moved Earlier)*
 
-> **Status**: Design phase - Advanced deployment automation
+> **Status**: Design phase - Advanced deployment automation  
+> **Rationale**: Moved up to unlock GitOps value and de-risk deployment automation before advanced scaling features
 
 #### **GitHub Actions Enhancement**
 - **ECR Integration** for image management
@@ -362,17 +409,17 @@ This roadmap demonstrates our progression from AWS ECS to Kubernetes (EKS), show
 
 ## 🚀 **Next Steps & Immediate Actions**
 
-### **Phase 7 Completion (Next 2-4 weeks)**
-1. **HTTPS Integration**: ACM certificates and TLS configuration
-2. **HPA Setup**: Horizontal pod autoscaling implementation
-3. **Load Testing**: Validate EKS performance under load
-4. **Cost Optimization**: Resource tuning and optimization
+### **Phase 8 Completion (Next 1-2 weeks)**
+1. **HPA Implementation**: Metrics server and HPA resource deployment
+2. **Load Testing**: Execute stepped testing and validate scaling behavior
+3. **Performance Tuning**: Optimize HPA parameters and resource usage
+4. **Documentation**: Update deployment guides and troubleshooting procedures
 
-### **Phase 8 Planning (Next 1-2 months)**
-1. **Observability Stack**: Prometheus, Grafana, Loki setup
-2. **Monitoring Dashboards**: Core metrics and visualization
-3. **Alerting Configuration**: Proactive monitoring and notifications
-4. **AI Integration**: Bedrock integration for intelligent insights
+### **Phase 9 Planning (Next 2-4 weeks)**
+1. **ArgoCD Strategy**: Decide on app-of-apps vs single app approach
+2. **GitOps Workflow**: Design staging → production promotion process
+3. **Rollback Procedures**: Define emergency rollback and recovery processes
+4. **Environment Management**: Set up multi-environment deployment strategy
 
 ---
 
@@ -399,5 +446,5 @@ We welcome contributions from the community! This project demonstrates:
 
 ---
 
-*Last Updated: August 2025*  
+*Last Updated: Aug 19, 2025*  
 *Next Review: September 2025*
