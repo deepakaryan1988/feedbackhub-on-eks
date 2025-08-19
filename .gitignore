@@ -59,3 +59,9 @@ docker-compose.override.yml
 # AI Assistant and Memory Bank
 .claude/
 memory-bank/
+
+# IDE, assistant, and local config files
+.vscode/
+.github/
+# Ignore entire cursor folder (previously only mcp.json)
+.cursor/
