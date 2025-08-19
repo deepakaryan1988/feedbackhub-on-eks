@@ -62,6 +62,5 @@ memory-bank/
 
 # IDE, assistant, and local config files
 .vscode/
-.github/
 # Ignore entire cursor folder (previously only mcp.json)
 .cursor/
